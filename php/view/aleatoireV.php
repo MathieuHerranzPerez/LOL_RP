@@ -8,11 +8,20 @@ displayEntete("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/" . st
     echo '<br/>';
     echo '</div>';
     echo '<div class="col-md-6">';
+
+    // tableau pour l'assignement des sorts à maxer
+    $arrayChiffre = array(1, 2, 3);
+    shuffle($arrayChiffre);
+
+    $i = 0;
     foreach($champion->getSpells() as $sort)
     {
         echo '<img id="' . $sort->getName() . '" class="sumSpell"
                 src="http://ddragon.leagueoflegends.com/cdn/7.20.2/img/spell/' . $sort->getImage() . '" title="' . $sort->getName() . '"
-                alt="' . $sort->getName() . '"><br/>';
+                alt="' . $sort->getName() . '">';
+        echo $i < 3 ? ' ' . $arrayChiffre[$i] : '';
+        echo '<br/>';
+        ++$i;
     }
 
     echo '<br/><br/><img id="' . $sumSpell1->getId() . '" class="sumSpell"

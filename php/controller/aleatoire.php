@@ -27,15 +27,17 @@ if(isset($_POST['nomChampion']))
 //    echo $champ->getName() . ' ';
 //echo '<br/>';
 
-    $pers = ChampionSpellsM::getChampById($persos->getTab()[$valeur]->getId());
+    $pers = ChampionSpellsM::getChamps();
     $spells = array();
 
-    foreach($pers->spells as $sp)
+    $idPerso = $persos->getTab()[$valeur]->getId();
+
+    foreach($pers->data->$idPerso->spells as $sp)
     {
         array_push($spells, new SummonerSpell(null, $sp->name, $sp->image->full));
     }
 
-    $champion = new Personnage($persos->getTab()[$valeur]->getId(), $persos->getTab()[$valeur]->getName(),
+    $champion = new Personnage($idPerso, $persos->getTab()[$valeur]->getName(),
                                $persos->getTab()[$valeur]->getTitle(), $persos->getTab()[$valeur]->getImage(), $spells);
 
     // -------------- SUMMONERPELLS ALEATOIRE -------------
