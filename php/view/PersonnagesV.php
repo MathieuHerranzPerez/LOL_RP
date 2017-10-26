@@ -14,11 +14,25 @@ displayEntete(null);
 
     foreach($persos->getTab() as $champ)
     {
-        echo '<input id="check' . $champ->getNameId() . '" class="checkChamp" value="' . $champ->getNameId() . '"
-                style="display: none;" name="nomChampion[]" type="checkbox" checked>';
-        echo '<img id="' . $champ->getNameId() . '" class="imgChamp activeChamp"
-                src="http://ddragon.leagueoflegends.com/cdn/7.20.2/img/champion/' . $champ->getImage() . '" title="' . $champ->getName() . '"
-                alt="' . $champ->getName() . '" onclick="togglePhoto(\'' . $champ->getNameId() . '\')">';
+        echo '<input id="check' . $champ->getId() . '" class="checkChamp" value="' . $champ->getNameId() . '"
+                style="display: none;" name="nomChampion[]" type="checkbox"';
+        if(dichotomie($tabCookie, $champ->getId(), 0, sizeof($tabCookie)) >= 0)  // suivant la valeur du cookie, on check ou non les personnages
+        {
+            echo ' checked';
+        }
+        echo '>';
+
+        echo '<img id="' . $champ->getId() . '" class="imgChamp';
+        if(dichotomie($tabCookie, $champ->getId(), 0, sizeof($tabCookie)) >= 0)
+        {
+            echo ' activeChamp';
+        }
+        else
+        {
+            echo ' inactiveChamp';
+        }
+        echo '" src="http://ddragon.leagueoflegends.com/cdn/7.20.2/img/champion/' . $champ->getImage() . '" title="' . $champ->getName() . '"
+                alt="' . $champ->getName() . '" onclick="togglePhoto(\'' . $champ->getId() . '\')">';
     }
 
     echo '<br/><button type="submit" name="champ"><h2>Générer</h2></button>';

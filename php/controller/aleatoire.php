@@ -9,17 +9,28 @@ require_once "../model/ChampionSpellsM.php";
 require_once "../phpCore/CollectionItems.php";
 require_once "../phpCore/Item.php";
 
+
 if(isset($_POST['nomChampion']))
 {
     // ------------- PERSONNAGE ALEATOIRE ---------------
-    $champASupp = $_POST['nomChampion'];
+    $champGarde = $_POST['nomChampion'];
 
 //foreach($champASupp as $champ)            //TEST
 //    echo $champ . ' ';
 //echo '<br/>';
 
     $persos = unserialize($_SESSION['persos']);
-    $persos = $persos->copie($champASupp);
+    $persos = $persos->copie($champGarde);
+
+    // POUR LE COOKIE
+    $tabCookie = array();
+    foreach($persos->getTab() as $p)
+    {
+        array_push($tabCookie, $p->getId());
+    }
+    $tabCookie = serialize($tabCookie);
+    setcookie("Persos",$tabCookie, time() + (180*24*60*60*1000), '/');
+    // fin création cookie
 
     srand();
     $valeur = rand();
