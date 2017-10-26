@@ -6,6 +6,8 @@ require_once "../phpCore/Personnage.php";
 require_once "../phpCore/CollectionSummonerSpells.php";
 require_once "../phpCore/SummonerSpell.php";
 require_once "../model/ChampionSpellsM.php";
+require_once "../phpCore/CollectionItems.php";
+require_once "../phpCore/Item.php";
 
 if(isset($_POST['nomChampion']))
 {
@@ -61,6 +63,13 @@ if(isset($_POST['nomChampion']))
 
     $sumSpell2 = new SummonerSpell($summonerSpells->getTab()[$valeur]->getId(), $summonerSpells->getTab()[$valeur]->getModes(),
         $summonerSpells->getTab()[$valeur]->getImage());
+
+    // -------------- STUFF ALEATOIRE ------------------
+
+    $listItems = new CollectionItems();
+
+
+    $items = $listItems->getAleatoire(6);
 
     require_once "../view/aleatoireV.php";
 }

@@ -1,6 +1,7 @@
 <?php
 
-require_once "collection.php";
+require_once "Collection.php";
+require_once "../model/ItemM.php";
 
 class CollectionItems extends Collection
 {
@@ -44,13 +45,40 @@ class CollectionItems extends Collection
     }
 
 
+    public function supprimer($id)
+    {
+        $indice = -1;
+        $i = 0;
+        foreach($this->tab as $item)
+        {
+            if($item->getId() == $id)
+            {
+                $indice = $i;
+            }
+            ++$i;
+        }
+
+        unset($this->tab[$indice]);
+        $this->tab = array_values($this->tab);  // pour ne pas sauter d'indice
+    }
+
+
     /**
      * @param $nb int nombre de Items souhaité
      * @return Item
      */
     public function getAleatoire($nb)
     {
-        return array_rand($this->tab, $nb);
+        $randItems = array();
+
+        for($i = 0; $i < $nb; $i++) {
+            srand();
+            $valeur = rand();
+            $valeur = $valeur % (sizeof($this->tab));
+            array_push($randItems,$this->tab[$valeur]);
+            $this->supprimer($this->tab[$valeur]->getId());
+        }
+        return $randItems;
     }
 
     /**
