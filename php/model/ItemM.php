@@ -8,7 +8,7 @@ class ItemM
      */
     public static function getItems()
     {
-        //$result = file_get_contents('https://euw1.api.riotgames.com/lol/static-data/v3/items?api_key=' . $apiKey . '&tags=image&dataById=true&tags=gold&tags=maps&tags=requiredChampion&dataById=true&tags=depth'); //TODO changer
+        //$result = file_get_contents('https://euw1.api.riotgames.com/lol/static-data/v3/items?api_key=' . $apiKey . '&tags=image&dataById=true&tags=gold&tags=maps&tags=requiredChampion&dataById=true&tags=depth&tags=tags'); //TODO changer
         $result = file_get_contents('../../js/testJSONItems.json');
         $listeItems = json_decode($result);
 

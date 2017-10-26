@@ -25,12 +25,12 @@ displayEntete("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/" . st
     }
 
     echo '<br/><br/><img id="' . $sumSpell1->getId() . '" class="sumSpell"
-                src="http://ddragon.leagueoflegends.com/cdn/7.20.2/img/spell/' . $sumSpell1->getImage() . '" title="' . $sumSpell1->getId() . '"
-                alt="' . $sumSpell1->getId() . '"><br/>';
+                src="http://ddragon.leagueoflegends.com/cdn/7.20.2/img/spell/' . $sumSpell1->getImage() . '" title="' . $sumSpell1->getName() . '"
+                alt="' . $sumSpell1->getName() . '"><br/>';
 
     echo '<img id="' . $sumSpell2->getId() . '" class="sumSpell"
-                src="http://ddragon.leagueoflegends.com/cdn/7.20.2/img/spell/' . $sumSpell2->getImage() . '" title="' . $sumSpell2->getId() . '"
-                alt="' . $sumSpell2->getId() . '">';
+                src="http://ddragon.leagueoflegends.com/cdn/7.20.2/img/spell/' . $sumSpell2->getImage() . '" title="' . $sumSpell2->getName() . '"
+                alt="' . $sumSpell2->getName() . '">';
     echo '</div>';
 
 echo '<br/><br/>';

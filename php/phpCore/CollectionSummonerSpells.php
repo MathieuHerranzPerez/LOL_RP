@@ -10,7 +10,6 @@ class CollectionSummonerSpells extends Collection
      */
     public function __construct($mode)
     {
-        //$this->model('SummonerSpellM', []);
         $this->tab = SummonerSpellM::getSorts($mode);
     }
 
