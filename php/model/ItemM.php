@@ -6,9 +6,9 @@ class ItemM
     /**
      * @return Items[] tableau avec les items, indéxé de 0 à nbItems
      */
-    public static function getItems()
+    public static function getItems($mode)
     {
-        //$result = file_get_contents('https://euw1.api.riotgames.com/lol/static-data/v3/items?api_key=' . $apiKey . '&tags=image&dataById=true&tags=gold&tags=maps&tags=requiredChampion&dataById=true&tags=depth&tags=tags'); //TODO changer
+        //$result = file_get_contents('https://euw1.api.riotgames.com/lol/static-data/v3/items?api_key=' . $apiKey . '&tags=all'); //TODO changer
         $result = file_get_contents('../../js/testJSONItems.json');
         $listeItems = json_decode($result);
 
@@ -16,15 +16,25 @@ class ItemM
         $resultat[0] = null;
 
         require_once "../phpCore/Item.php";
-        $summonerRift = 11; // id correspondants aux maps
-        $howlingAbyss = 12;
+        if($mode == "CLASSIC")
+        {
+            $map = 11; // id correspondants aux maps
+        }
+        else // aram
+        {
+            $map = 12;
+        }
 
-        foreach( (array) $listeItems->data as $item)
+        foreach((array) $listeItems->data as $item)
         {
             //TODO faire le lien automatiquement entre le nom de la map et ca place dans le tableau "maps" via le json des maps
-            if(($item->maps->$summonerRift == true || $item->maps->$howlingAbyss == true) &&
+            if(($item->maps->$map == true) &&
             ! array_key_exists("requiredChampion", $item) &&
-            $item->gold->purchasable == true && $item->depth == 3) {
+            $item->gold->purchasable == true &&
+            // pour ne pas se farcire les enchantements des boosts
+            ($item->depth == 3 || ($item->depth == 2 && in_array("Boots", $item->tags))) &&// pour les chaussures
+                array_key_exists("plaintext", $item)) // pour retirer les enchantements avec image de boots
+            {
                 $resultat[$i] = new Item($item->id, $item->name, $item->plaintext, $item->image->full, $item->gold->total, $item->maps);
                 ++$i;
             }

@@ -33,15 +33,13 @@ displayEntete("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/" . st
                 alt="' . $sumSpell2->getName() . '">';
     echo '</div>';
 
-echo '<br/><br/>';
+    echo '<br/><br/>';
 
     foreach($items as $item)
     {
-        echo '<input id="check' . $item->getName() . '" class="checkChamp" value="' . $item->getName() . '"
-                    style="display: none;" name="nomItem[]" type="checkbox" checked>';
         echo '<img id="' . $item->getName() . '" class="imgItem"
                     src="http://ddragon.leagueoflegends.com/cdn/7.20.2/img/item/' . $item->getImage() . '" title="' . $item->getName() . '"
-                    alt="' . $item->getName() . '" onclick="togglePhoto(\'' . $item->getName() . '\')">';
+                    alt="' . $item->getName() . '">';
     }
 
 displayFin();

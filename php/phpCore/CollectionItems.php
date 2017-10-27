@@ -16,7 +16,7 @@ class CollectionItems extends Collection
         switch($ctp)
         {
             case 1:
-                $this->construct2();
+                $this->construct2($args[0]);
                 break;
             default:
                 $this->construct1();
@@ -25,12 +25,14 @@ class CollectionItems extends Collection
     }
     public function construct1()
     {
-        $this->tab = ItemM::getItems();
+        $this->tab = ItemM::getItems("CLASSIC");
         usort($this->tab, "Item::compare");
     }
 
-    public function construct2()
+    public function construct2($mode)
     {
+        $this->tab = ItemM::getItems($mode);
+        usort($this->tab, "Item::compare");
     }
 
     /**
@@ -71,7 +73,8 @@ class CollectionItems extends Collection
     {
         $randItems = array();
 
-        for($i = 0; $i < $nb; $i++) {
+        for($i = 0; $i < $nb; $i++)
+        {
             srand();
             $valeur = rand();
             $valeur = $valeur % (sizeof($this->tab));

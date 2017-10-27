@@ -77,8 +77,14 @@ if(isset($_POST['nomChampion']))
 
     // -------------- STUFF ALEATOIRE ------------------
 
-    $listItems = new CollectionItems();
+    $listItems = new CollectionItems($mode);
 
+    // TODO test a enlever
+    foreach($listItems->getTab() as $item)
+    {
+        echo '<img src="http://ddragon.leagueoflegends.com/cdn/7.20.2/img/item/' . $item->getImage() . '" alt="' . $item->getName() . '" 
+                title="' . $item->getName() . '">';
+    }
 
     $items = $listItems->getAleatoire(6);
 
