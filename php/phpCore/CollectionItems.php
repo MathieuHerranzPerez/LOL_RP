@@ -67,12 +67,44 @@ class CollectionItems extends Collection
 
     /**
      * @param $nb int nombre de Items souhaité
+     * @param $sumSpell1
+     * @param $sumSpell2
+     * @param $champion
      * @return Item
      */
-    public function getAleatoire($nb)
+    public function getAleatoire($nb, $sumSpell1, $sumSpell2, $champion)
     {
         $randItems = array();
 
+        // Dans le cas où un des summoner spelle est un smite
+        if($sumSpell1->getName() == "SummonerSmite" || $sumSpell2->getName() == "SummonerSmite")
+        {
+            $itemJungle = array();
+            foreach($this->tab as $item)
+            {
+                if(strpos($item->getName(), "Enchantment") !== false)
+                {
+                    array_push($itemJungle, new Item($item->getId(), $item->getName(), $item->getPlaintext(),
+                            $item->getImage(), $item->getGold(), $item->getMaps()));
+                    $this->supprimer($item->getId());
+                }
+            }
+            srand();
+            $valeur = rand();
+            $valeur = $valeur % (sizeof($itemJungle));
+            array_push($randItems, $itemJungle[$valeur]);
+            --$nb;
+        }
+        // on supprime les items jungle
+        foreach($this->tab as $item)
+        {
+            if(strpos($item->getName(), "Enchantment") !== false)
+            {
+                $this->supprimer($item->getId());
+            }
+        }
+
+        // on selectionne les items
         for($i = 0; $i < $nb; $i++)
         {
             srand();

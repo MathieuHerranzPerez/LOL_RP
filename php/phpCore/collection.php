@@ -19,5 +19,5 @@ abstract class Collection
         return $str;
     }
 
-    public abstract function getAleatoire($nb);
+    //public abstract function getAleatoire($nb);
 }

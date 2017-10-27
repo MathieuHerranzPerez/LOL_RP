@@ -86,7 +86,9 @@ if(isset($_POST['nomChampion']))
                 title="' . $item->getName() . '">';
     }
 
-    $items = $listItems->getAleatoire(6);
+
+
+    $items = $listItems->getAleatoire(6, $sumSpell1, $sumSpell2, $champion);
 
     require_once "../view/aleatoireV.php";
 }

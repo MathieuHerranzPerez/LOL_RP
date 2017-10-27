@@ -27,7 +27,7 @@ class ItemM
 
         foreach((array) $listeItems->data as $item)
         {
-            //TODO faire le lien automatiquement entre le nom de la map et ca place dans le tableau "maps" via le json des maps
+            //TODO enlever les "quick charge" des objets
             if(($item->maps->$map == true) &&
             ! array_key_exists("requiredChampion", $item) &&
             $item->gold->purchasable == true &&
