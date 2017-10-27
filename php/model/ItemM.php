@@ -43,4 +43,13 @@ class ItemM
 
         return $resultat;
     }
+
+    public static function getViktorItem()
+    {
+        $result = file_get_contents('../../js/testJSONViktorItem.json');
+        $listeItems = json_decode($result);
+        $resultat = new Item(str_replace(".png", "", $listeItems->image->full), $listeItems->name, $listeItems->plaintext, $listeItems->image->full, $listeItems->gold->total, $listeItems->maps, $listeItems->tags);
+
+        return $resultat;
+    }
 }

@@ -76,6 +76,14 @@ class CollectionItems extends Collection
     {
         $randItems = array();
 
+        // gestion du cas particulier Viktor
+        if($champion->getName() == "Viktor")
+        {
+            $itemVik = ItemM::getViktorItem();
+            array_push($randItems, $itemVik);
+            --$nb;
+        }
+
         // gestion des boots
         if($champion->getName() != "Cassiopeia")
         {
