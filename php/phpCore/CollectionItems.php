@@ -65,6 +65,7 @@ class CollectionItems extends Collection
     }
 
 
+    //TODO gerer le nombre d'item supp / item ward
     /**
      * @param $nb int nombre de Items souhaité
      * @param $sumSpell1
