@@ -32,10 +32,11 @@ class ItemM
             ! array_key_exists("requiredChampion", $item) &&
             $item->gold->purchasable == true &&
             // pour ne pas se farcire les enchantements des boosts
-            ($item->depth == 3 || ($item->depth == 2 && in_array("Boots", $item->tags))) &&// pour les chaussures
+                // les chaussures et les items de rang 4
+            ((($item->depth == 3 && !array_key_exists("into", $item) || $item->depth == 4)) || ($item->depth == 2 && in_array("Boots", $item->tags))) &&
                 array_key_exists("plaintext", $item)) // pour retirer les enchantements avec image de boots
             {
-                $resultat[$i] = new Item($item->id, $item->name, $item->plaintext, $item->image->full, $item->gold->total, $item->maps);
+                $resultat[$i] = new Item($item->id, $item->name, $item->plaintext, $item->image->full, $item->gold->total, $item->maps, $item->tags);
                 ++$i;
             }
         }

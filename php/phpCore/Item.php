@@ -8,6 +8,7 @@ class Item
     private $image;
     private $gold;
     private $maps;
+    private $tags;
 
     /**
      * PersonnageM constructor
@@ -17,7 +18,7 @@ class Item
      * @param $image
      * @param $gold
      */
-    public function __construct($id, $name, $plaintext, $image, $gold, $maps)
+    public function __construct($id, $name, $plaintext, $image, $gold, $maps, $tags)
     {
         $this->id = $id;
         $this->name = $name;
@@ -25,6 +26,7 @@ class Item
         $this->image = $image;
         $this->gold = $gold;
         $this->maps = $maps;
+        $this->tags = $tags;
     }
 
     public function __destruct()
@@ -58,6 +60,11 @@ class Item
     public function getMaps()
     {
         return $this->maps;
+    }
+
+    public function getTags()
+    {
+        return $this->tags;
     }
 
     /**

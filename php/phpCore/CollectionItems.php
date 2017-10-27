@@ -76,7 +76,38 @@ class CollectionItems extends Collection
     {
         $randItems = array();
 
-        // Dans le cas où un des summoner spelle est un smite
+        // gestion des boots
+        if($champion->getName() != "Cassiopeia")
+        {
+            $cptBoots = 0;
+            $itemBoots = array();
+            foreach($this->tab as $item)
+            {
+                // on supprime les boots de randItems
+                if(is_array($item->getTags()))
+                {
+                    foreach ($item->getTags() as $tag)
+                    {
+                        if ($tag == "Boots") {
+                            if ($cptBoots < 1)
+                            {
+                                array_push($itemBoots, new Item($item->getId(), $item->getName(), $item->getPlaintext(),
+                                    $item->getImage(), $item->getGold(), $item->getMaps(), $item->getTags()));
+                            }
+                            $this->supprimer($item->getId());
+                        }
+                    }
+                }
+            }
+            srand();
+            $valeur = rand();
+            $valeur = $valeur % (sizeof($itemBoots));
+            array_push($randItems, $itemBoots[$valeur]);
+            --$nb;
+        }
+
+
+        // Dans le cas où un des summoner spells est un smite
         if($sumSpell1->getName() == "SummonerSmite" || $sumSpell2->getName() == "SummonerSmite")
         {
             $itemJungle = array();
@@ -85,7 +116,7 @@ class CollectionItems extends Collection
                 if(strpos($item->getName(), "Enchantment") !== false)
                 {
                     array_push($itemJungle, new Item($item->getId(), $item->getName(), $item->getPlaintext(),
-                            $item->getImage(), $item->getGold(), $item->getMaps()));
+                        $item->getImage(), $item->getGold(), $item->getMaps(), $item->getTags()));
                     $this->supprimer($item->getId());
                 }
             }
