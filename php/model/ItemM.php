@@ -27,14 +27,14 @@ class ItemM
 
         foreach((array) $listeItems->data as $item)
         {
-            //TODO enlever les "quick charge" des objets
             if(($item->maps->$map == true) &&
             ! array_key_exists("requiredChampion", $item) &&
             $item->gold->purchasable == true &&
             // pour ne pas se farcire les enchantements des boosts
                 // les chaussures et les items de rang 4
             ((($item->depth == 3 && !array_key_exists("into", $item) || $item->depth == 4)) || ($item->depth == 2 && in_array("Boots", $item->tags))) &&
-                array_key_exists("plaintext", $item)) // pour retirer les enchantements avec image de boots
+                array_key_exists("plaintext", $item) && // pour retirer les enchantements avec image de boots
+                strpos($item->name, "(Quick Charge)") === false)    // pour retirer les Quick Charge
             {
                 $resultat[$i] = new Item($item->id, $item->name, $item->plaintext, $item->image->full, $item->gold->total, $item->maps, $item->tags);
                 ++$i;
