@@ -103,6 +103,7 @@ class CollectionItems extends Collection
                                 array_push($itemBoots, new Item($item->getId(), $item->getName(), $item->getPlaintext(),
                                     $item->getImage(), $item->getGold(), $item->getMaps(), $item->getTags()));
                             }
+                            $this->supprimer($item->getId());
                         }
                     }
                 }
@@ -113,17 +114,19 @@ class CollectionItems extends Collection
             array_push($randItems, $itemBoots[$valeur]);
             --$nb;
         }
-        // on supprime les boots
-        foreach($this->tab as $item)
+        if($champion->getName() == "Cassiopeia")
         {
-            // on supprime les boots de randItems
-            if(is_array($item->getTags()))
+            foreach ($this->tab as $item)
             {
-                foreach ($item->getTags() as $tag)
+                // on supprime les boots de randItems
+                if (is_array($item->getTags()))
                 {
-                    if ($tag == "Boots")
+                    foreach ($item->getTags() as $tag)
                     {
-                        $this->supprimer($item->getId());
+                        if ($tag == "Boots")
+                        {
+                            $this->supprimer($item->getId());
+                        }
                     }
                 }
             }
