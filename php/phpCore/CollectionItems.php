@@ -1,6 +1,7 @@
 <?php
 
 require_once "Collection.php";
+require_once "Item.php";
 require_once "../model/ItemM.php";
 
 class CollectionItems extends Collection
@@ -168,7 +169,17 @@ class CollectionItems extends Collection
             $valeur = rand();
             $valeur = $valeur % (sizeof($this->tab));
             array_push($randItems,$this->tab[$valeur]);
-            $this->supprimer($this->tab[$valeur]->getId());
+            // s'il s'agit du Hextech
+            if( strpos($this->tab[$valeur]->getName(), 'Hextech') !== false ) {
+                // on supprime les autres items Hextem du tableau pour ne pas les avoir
+                foreach($this->tab as $item) {
+                    if( strpos($item->getName(), 'Hextech') !== false )
+                    $this->supprimer($item->getId());
+                }
+            }
+            else
+                $this->supprimer($this->tab[$valeur]->getId());
+
         }
         return $randItems;
     }
