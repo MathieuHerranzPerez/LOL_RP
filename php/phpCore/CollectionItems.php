@@ -169,12 +169,21 @@ class CollectionItems extends Collection
             $valeur = rand();
             $valeur = $valeur % (sizeof($this->tab));
             array_push($randItems,$this->tab[$valeur]);
+
             // s'il s'agit du Hextech
             if( strpos($this->tab[$valeur]->getName(), 'Hextech') !== false ) {
                 // on supprime les autres items Hextem du tableau pour ne pas les avoir
                 foreach($this->tab as $item) {
                     if( strpos($item->getName(), 'Hextech') !== false )
                     $this->supprimer($item->getId());
+                }
+            }
+            // s'il s'agit du item à Gold
+            if( in_array("GoldPer", $this->tab[$valeur]->getTags()) == true) {
+                // on supprime les autres items à gold du tableau pour ne pas les avoir
+                foreach($this->tab as $item) {
+                    if( in_array("GoldPer", $this->tab[$valeur]->getTags()) == true )
+                        $this->supprimer($item->getId());
                 }
             }
             else
