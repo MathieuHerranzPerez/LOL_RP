@@ -41,7 +41,7 @@ if(isset($_POST['nomChampion']))
             $persosCopie = new CollectionPersonnages(null); // pour appeller le contructeur "par defaut"
             foreach ($persos->getTab() as $perso)
             {
-                if (in_array($role, $perso->getTags())) 
+                if (in_array($role, $perso->getTags()))
                 {
                     $persosCopie->ajouter($perso);
                 }
@@ -51,61 +51,66 @@ if(isset($_POST['nomChampion']))
     }
 
 
-    srand();
-    $valeur = rand();
-    $valeur = $valeur % (sizeof($persos->getTab()));
-
-
-    $pers = ChampionSpellsM::getChamps();
-    $spells = array();
-
-    // On selectionne le personnage aléatoirement
-    $idPerso = $persos->getTab()[$valeur]->getId();
-
-    foreach($pers->data->$idPerso->spells as $sp)
+    if(sizeof($persos->getTab()) > 0)
     {
-        array_push($spells, new SummonerSpell(null, $sp->name, $sp->image->full));
+        srand();
+        $valeur = rand();
+        $valeur = $valeur % (sizeof($persos->getTab()));
+
+
+        $pers = ChampionSpellsM::getChamps();
+        $spells = array();
+
+        // On selectionne le personnage aléatoirement
+        $idPerso = $persos->getTab()[$valeur]->getId();
+
+        foreach ($pers->data->$idPerso->spells as $sp)
+        {
+            array_push($spells, new SummonerSpell(null, $sp->name, $sp->image->full));
+        }
+
+        $champion = new Personnage($idPerso, $persos->getTab()[$valeur]->getName(),
+            $persos->getTab()[$valeur]->getTitle(), $persos->getTab()[$valeur]->getImage(), $spells, $persos->getTab()[$valeur]->getTags());
+
+        // -------------- SUMMONERPELLS ALEATOIRE -------------
+
+        $mode = htmlentities($_POST['mode']);
+
+        $summonerSpells = new CollectionSummonerSpells($mode);
+
+        srand();
+        $valeur = rand();
+        $valeur = $valeur % (sizeof($summonerSpells->getTab()));
+
+        $sumSpell1 = new SummonerSpell($summonerSpells->getTab()[$valeur]->getId(), $summonerSpells->getTab()[$valeur]->getModes(),
+            $summonerSpells->getTab()[$valeur]->getImage());
+
+        $summonerSpells->supprimer($sumSpell1->getId());
+
+        srand();
+        $valeur = rand();
+        $valeur = $valeur % (sizeof($summonerSpells->getTab()));
+
+        $sumSpell2 = new SummonerSpell($summonerSpells->getTab()[$valeur]->getId(), $summonerSpells->getTab()[$valeur]->getModes(),
+            $summonerSpells->getTab()[$valeur]->getImage());
+
+        // -------------- STUFF ALEATOIRE ------------------
+
+        $listItems = new CollectionItems($mode);
+
+//        // TODO test a enlever
+//        foreach ($listItems->getTab() as $item)
+//        {
+//            echo '<img src="http://ddragon.leagueoflegends.com/cdn/7.20.2/img/item/' . $item->getImage() . '" alt="' . $item->getName() . '"
+//                title="' . $item->getName() . '">';
+//        }
+
+        $items = $listItems->getAleatoire(6, $sumSpell1, $sumSpell2, $champion);
+
+        require_once "../view/aleatoireV.php";
     }
-
-    $champion = new Personnage($idPerso, $persos->getTab()[$valeur]->getName(),
-                               $persos->getTab()[$valeur]->getTitle(), $persos->getTab()[$valeur]->getImage(), $spells, $persos->getTab()[$valeur]->getTags());
-
-    // -------------- SUMMONERPELLS ALEATOIRE -------------
-
-    $mode = htmlentities($_POST['mode']);
-
-    $summonerSpells = new CollectionSummonerSpells($mode);
-
-    srand();
-    $valeur = rand();
-    $valeur = $valeur % (sizeof($summonerSpells->getTab()));
-
-    $sumSpell1 = new SummonerSpell($summonerSpells->getTab()[$valeur]->getId(), $summonerSpells->getTab()[$valeur]->getModes(),
-        $summonerSpells->getTab()[$valeur]->getImage());
-
-    $summonerSpells->supprimer($sumSpell1->getId());
-
-    srand();
-    $valeur = rand();
-    $valeur = $valeur % (sizeof($summonerSpells->getTab()));
-
-    $sumSpell2 = new SummonerSpell($summonerSpells->getTab()[$valeur]->getId(), $summonerSpells->getTab()[$valeur]->getModes(),
-        $summonerSpells->getTab()[$valeur]->getImage());
-
-    // -------------- STUFF ALEATOIRE ------------------
-
-    $listItems = new CollectionItems($mode);
-
-    // TODO test a enlever
-    foreach($listItems->getTab() as $item)
+    else
     {
-        echo '<img src="http://ddragon.leagueoflegends.com/cdn/7.20.2/img/item/' . $item->getImage() . '" alt="' . $item->getName() . '" 
-                title="' . $item->getName() . '">';
+        require_once "../view/erreurV.php";
     }
-
-
-
-    $items = $listItems->getAleatoire(6, $sumSpell1, $sumSpell2, $champion);
-
-    require_once "../view/aleatoireV.php";
 }
