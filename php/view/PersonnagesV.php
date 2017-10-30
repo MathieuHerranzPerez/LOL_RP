@@ -14,7 +14,7 @@ displayEntete(null);
 
     echo '<select name="role">
             <option value="All" selected>All</option>
-            <option value="Marksman">Marksmant</option>
+            <option value="Marksman">Marksman</option>
             <option value="Assassin">Assassin</option>
             <option value="Support">Support</option>
             <option value="Mage">Mage</option>
