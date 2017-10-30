@@ -114,3 +114,7 @@ if(isset($_POST['nomChampion']))
         require_once "../view/erreurV.php";
     }
 }
+else
+{
+    require_once "../view/erreurV.php";
+}
