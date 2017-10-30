@@ -12,6 +12,16 @@ displayEntete(null);
             <option value="ARAM">Aram</option>
           </select><br/>';
 
+    echo '<select name="role">
+            <option value="All" selected>All</option>
+            <option value="Marksman">Marksmant</option>
+            <option value="Assassin">Assassin</option>
+            <option value="Support">Support</option>
+            <option value="Mage">Mage</option>
+            <option value="Fighter">Fighter</option>
+            <option value="Tank">Tank</option>
+          </select><br/>';
+
     foreach($persos->getTab() as $champ)
     {
         echo '<input id="check' . $champ->getId() . '" class="checkChamp" value="' . $champ->getNameId() . '"

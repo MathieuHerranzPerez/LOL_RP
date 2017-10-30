@@ -10,6 +10,7 @@ class Personnage implements Comparable
     private $title;
     private $image;
     private $spells;        // ChampionSpells
+    private $tags;          // array
 
 
     /**
@@ -20,7 +21,7 @@ class Personnage implements Comparable
      * @param $image
      * @param $spells ChampionSpells[]
      */
-    public function __construct($id, $name, $title, $image, $spells)
+    public function __construct($id, $name, $title, $image, $spells, $tags)
     {
         $this->id = $id;
         $this->name = $name;
@@ -28,6 +29,7 @@ class Personnage implements Comparable
         $this->image = $image;
         $this->nameId = str_replace(' ', '', str_replace('\'', '', str_replace('.', '', $name)));
         $this->spells = $spells;
+        $this->tags = $tags;
     }
 
     public function __destruct()
@@ -61,6 +63,11 @@ class Personnage implements Comparable
     public function getSpells()
     {
         return $this->spells;
+    }
+
+    public function getTags()
+    {
+        return $this->tags;
     }
 
     /**

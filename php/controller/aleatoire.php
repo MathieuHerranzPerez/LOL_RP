@@ -32,17 +32,34 @@ if(isset($_POST['nomChampion']))
     setcookie("Persos",$tabCookie, time() + (180*24*60*60*1000), '/');
     // fin création cookie
 
+    // si on a placé des "filtres", on supprime les champions qui ne correspondent pas
+    if(isset($_POST['role']))
+    {
+        $role = $_POST['role'];
+        if($role != "All")
+        {
+            $persosCopie = new CollectionPersonnages(null); // pour appeller le contructeur "par defaut"
+            foreach ($persos->getTab() as $perso)
+            {
+                if (in_array($role, $perso->getTags())) 
+                {
+                    $persosCopie->ajouter($perso);
+                }
+            }
+            $persos = $persosCopie;
+        }
+    }
+
+
     srand();
     $valeur = rand();
     $valeur = $valeur % (sizeof($persos->getTab()));
 
-//foreach($persos->getTab() as $champ)      //TEST
-//    echo $champ->getName() . ' ';
-//echo '<br/>';
 
     $pers = ChampionSpellsM::getChamps();
     $spells = array();
 
+    // On selectionne le personnage aléatoirement
     $idPerso = $persos->getTab()[$valeur]->getId();
 
     foreach($pers->data->$idPerso->spells as $sp)
@@ -51,7 +68,7 @@ if(isset($_POST['nomChampion']))
     }
 
     $champion = new Personnage($idPerso, $persos->getTab()[$valeur]->getName(),
-                               $persos->getTab()[$valeur]->getTitle(), $persos->getTab()[$valeur]->getImage(), $spells);
+                               $persos->getTab()[$valeur]->getTitle(), $persos->getTab()[$valeur]->getImage(), $spells, $persos->getTab()[$valeur]->getTags());
 
     // -------------- SUMMONERPELLS ALEATOIRE -------------
 

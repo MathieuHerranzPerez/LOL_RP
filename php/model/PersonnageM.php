@@ -20,7 +20,7 @@ class PersonnageM
 
         foreach($listeChampions->data as $champ)
         {
-            $resultat[$i] = new Personnage($champ->id, $champ->name, $champ->title, $champ->image->full, null);
+            $resultat[$i] = new Personnage($champ->id, $champ->name, $champ->title, $champ->image->full, null, $champ->tags);
             ++$i;
         }
 

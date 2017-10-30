@@ -9,9 +9,15 @@
 
     // recuperer cookie persos : tabCookie contient les id des persos
     $tabCookie = array();
-    $tabCookie = unserialize($_COOKIE["Persos"]);
-    sort($tabCookie);
-
+    if(isset($_COOKIE['Persos']))
+    {
+        $tabCookie = unserialize($_COOKIE["Persos"]);
+        sort($tabCookie);
+    }
+    else
+    {
+        $tabCookie = "";
+    }
 
     $persos = new CollectionPersonnages();
     $_SESSION['persos'] = serialize($persos);

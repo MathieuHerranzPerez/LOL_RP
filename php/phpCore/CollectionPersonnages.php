@@ -13,6 +13,9 @@ class CollectionPersonnages extends Collection
         $args = func_get_args();
         switch($ctp)
         {
+            case 2:
+                $this->constructCopie($args[0]);
+                break;
             case 1:
                 $this->construct2();
                 break;
@@ -20,6 +23,21 @@ class CollectionPersonnages extends Collection
                 $this->construct1();
                 break;
         }
+    }
+
+    /**
+     * Constructeur par recopie
+     * @param $collectionPersos CollectionPersonnages
+     * @return CollectionPersonnages
+     */
+    private function constructCopie($collectionPersos)
+    {
+        $newCollectionPersos = new CollectionPersonnages(null, null);   // pour appeller le contructeur "à deux args"
+        foreach($collectionPersos->getTab() as $perso)
+        {
+            $newCollectionPersos->ajouter($perso);
+        }
+        return $newCollectionPersos;
     }
 
     private function construct1()
@@ -30,7 +48,7 @@ class CollectionPersonnages extends Collection
     }
 
     /**
-     * Ap artir de $tableauAGarder, creer un nouveau CollectionPersonnages
+     * A partir de $tableauAGarder, creer un nouveau CollectionPersonnages
      * @param $tableauAGarder String[] le nom des personnages à garder
      * @return CollectionPersonnages
      */
