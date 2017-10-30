@@ -1,3 +1,8 @@
+html,body {
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-size: 20px;
     font-weight: bold;
@@ -24,3 +29,85 @@ body {
     margin: auto;
 }
 
+/*_______________________________ Aleatoire Style ________________________________*/
+
+
+.infos {
+    background-color: rgba(0,0,0,0.9);
+    height: 94%;
+}
+
+.infos h1 {
+    opacity: 1;
+    margin-bottom: 0;
+    font-size:5rem;
+}
+
+.infos .infosLane {
+    font-size:2rem;
+}
+.infos .sectionInfos
+{
+    margin-bottom: 10%;
+    font-size:2rem;
+}
+
+
+.madiv
+{
+    display: block;
+    right: 0;
+}
+
+.leftDiv {
+    position: absolute;
+    left:0;
+    right: auto;
+    height: 100%;
+    width: 30%;
+
+    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0.9) 0, rgba(0,0,0,0.0001) 100%);
+    background-image: -o-linear-gradient(left, rgba(0,0,0,0.9) 0, rgba(0,0,0,0.0001) 100%);
+    background-image: -webkit-gradient(linear, left top, right top, from(rgba(0,0,0,0.9)), to(rgba(0,0,0,0.0001)));
+    background-image: linear-gradient(to right, rgba(0,0,0,0.9) 0, rgba(0,0,0,0.0001) 100%);
+    background-repeat: repeat-x;
+
+    top: 0;
+    bottom: 0;
+}
+
+.rightDiv {
+    position: absolute;
+    left: auto;
+    right: 0;
+    height: 100%;
+    width: 25%;
+
+    background-image: -webkit-linear-gradient(left,rgba(0,0,0,.0001) 0,rgba(0,0,0,0.9) 100%);
+    background-image: -o-linear-gradient(left,rgba(0,0,0,.0001) 0,rgba(0,0,0,0.9) 100%);
+    background-image: -webkit-gradient(linear,left top,right top,from(rgba(0,0,0,.0001)),to(rgba(0,0,0,0.9)));
+    background-image: linear-gradient(to right,rgba(0,0,0,.0001) 0,rgba(0,0,0,0.9) 100%);
+    background-repeat: repeat-x;
+
+
+    top: 0;
+    bottom: 0;
+}
+
+@media screen and (max-width: 1200px) {
+    .infos {
+        padding-left: 15%;
+    }
+
+}
+
+footer {
+    background-color: rgba(0, 0, 0, 0.9);
+    text-align: center;
+    bottom: 0;
+    height: 5%;
+}
+
+img:not(.imgChampAlea):not(.imgChamp) {
+    border-radius: 15% ;
+}
