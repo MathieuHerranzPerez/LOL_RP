@@ -1,17 +1,22 @@
 <?php
 
-displayEntete(null);
+displayEntete("img/summonerRift.jpg");
 //ob_start();
+echo '<h1 style="font-family: Cinzel, Helvetica, serif; font-size: 50px; margin-top: 50px; color: #cac1bd;">RANDOM PICK<br/>LEAGUE OF LEGENDS</h1>';
+echo '<div class="col-xl-12 degradeHautBas"></div>';
+echo '<div class="row personnagesRow">';
 
-    echo '<button onclick="toutSelectionner()">Tout selectionner</button>';
-    echo '<button onclick="toutDeselectionner()">Tout déselectionner</button><br/>';
 
-    echo '<form method="post" action="' . WEBROOT . 'php/controller/aleatoire.php">';
+echo '<form method="post" action="' . WEBROOT . 'php/controller/aleatoire.php" style="overflow: auto;">';
+    echo '<div class="col-xl-4 degrade" style="float: left;">';
+
+    echo '<h2>On which map ?</h2>';
     echo '<select name="mode">
             <option value="CLASSIC" selected>Summoner Rift</option>
             <option value="ARAM">Aram</option>
           </select><br/>';
 
+    echo '<h2>What role of champion ?</h2>';
     echo '<select name="role">
             <option value="All" selected>All</option>
             <option value="Marksman">Marksman</option>
@@ -22,6 +27,12 @@ displayEntete(null);
             <option value="Tank">Tank</option>
           </select><br/>';
 
+    echo '<br/><center><button  class="btnGenerer" type="submit" name="champ">Summone</button></center>';
+echo '</div>';
+    echo '<div class="col-md-8 listeChamp" style="padding: 3% 3% 3% 10%; overflow: hidden; height: 100%">';
+
+    echo '<button type=button class="btnPerso" onclick="toutSelectionner()">Select all</button>';
+    echo '<button type=button class="btnPerso" onclick="toutDeselectionner()">Unselect all</button><br/>';
     foreach($persos->getTab() as $champ)
     {
         echo '<input id="check' . $champ->getId() . '" class="checkChamp" value="' . $champ->getNameId() . '"
@@ -45,9 +56,9 @@ displayEntete(null);
                 alt="' . $champ->getName() . '" onclick="togglePhoto(\'' . $champ->getId() . '\')">';
     }
 
-    echo '<br/><button type="submit" name="champ"><h2>Générer</h2></button>';
-    echo '</form>';
-
+    echo '</div>';
+echo '</form>';
+echo '</div>';      // row
 displayFin();
 
 //$contenu = ob_get_clean();

@@ -24,10 +24,9 @@ function displayHeader($title)
               <meta name="viewport" content="width=device-width, initial-scale=1">
               <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
               <link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
+              <link href="' . WEBROOT . 'bootstrap/css/bootstrap.min.css" rel="stylesheet">
               <link rel="stylesheet" href="' . WEBROOT . 'css/main.css" id="css">
               <link rel="icon" type="image/png" href="" />
-
-              <link href="' . WEBROOT . 'bootstrap/css/bootstrap.min.css" rel="stylesheet">
           </head>';
 }
 
@@ -52,7 +51,6 @@ function displayEntete($urlBackground)
     echo '<!doctype html>';
     displayHeader("Random Pick LOL");
     echo '<body style="background: url(\'' . $urlBackground . '\') no-repeat center fixed; background-size: cover;">
-        <div class="container">
             <div id="contenu">';
 }
 
@@ -67,8 +65,7 @@ function displayEnteteAlea($urlBackground)
 
 function displayFin()
 {
-    echo '</div>
-        </div>';
+    echo '</div>';
     displayFooter();
     echo '</body>
 </html>';

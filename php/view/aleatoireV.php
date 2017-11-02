@@ -2,7 +2,7 @@
 
 displayEnteteAlea("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/" . str_replace('.png', '_0.jpg', $champion->getImage()));
 
-echo '<div class="row" >
+echo '<div class="row">
         <div class="infos col-xl-4">
         <div class="row sectionInfos" style="margin-bottom: 15%;margin-top:15%">
             <div class="col-sm-1">
@@ -13,8 +13,8 @@ echo '<div class="row" >
                 alt="' . $champion->getName() . '">
             </div>
             <div class="col-sm-7">
-                <h1>'. $champion->getName() .'</h1>
-                <span class="infosLane">Top Lane - Tank</span>
+                <h1 style="text-align: left;">'. $champion->getName() .'</h1>
+                <span class="infosLane">' . $champion->getTitle() . '</span>
             </div>
         </div>';
 
