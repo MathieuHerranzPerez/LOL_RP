@@ -99,6 +99,10 @@ select option {
 
 }
 
+.imgChamp {
+    cursor: pointer;
+}
+
 .degradeHautBas {
     background: rgba(0, 0, 0, 0);
     background: -webkit-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75));

@@ -27,7 +27,7 @@ echo '<form method="post" action="' . WEBROOT . 'php/controller/aleatoire.php" s
             <option value="Tank">Tank</option>
           </select><br/>';
 
-    echo '<br/><center><button  class="btnGenerer" type="submit" name="champ">Summone</button></center>';
+    echo '<br/><center><button  class="btnGenerer" type="submit" name="champ">Get Started</button></center>';
 echo '</div>';
     echo '<div class="col-md-8 listeChamp" style="padding: 3% 3% 3% 10%; overflow: hidden; height: 100%">';
 
