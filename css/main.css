@@ -24,6 +24,9 @@ h3, h2 {
 
 .imgChamp {
     height: 50px;
+    border-radius: 50%;
+    border: 2px inset darkgoldenrod;
+    margin: 2px;
 }
 
 .inactiveChamp {
@@ -221,8 +224,8 @@ select option {
 @media screen and (max-width: 1200px) {
     .infos {
         padding-left: 15%;
+        opacity: 0.8;
     }
-
 }
 
 footer {
