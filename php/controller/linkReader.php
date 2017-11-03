@@ -30,14 +30,18 @@ if(isset($_GET['chaine']))
     }
 
     $perso = $data[0];
-    $sum1 = $data[1];
-    $sum2 = $data[2];
-    $item[0] = $data[3];
-    $item[1] = $data[4];
-    $item[2] = $data[5];
-    $item[3] = $data[6];
-    $item[4] = $data[7];
-    $item[5] = $data[8];
+    $arrayChiffre = array();
+    array_push($arrayChiffre, $data[1]);
+    array_push($arrayChiffre, $data[2]);
+    array_push($arrayChiffre, $data[3]);
+    $sum1 = $data[4];
+    $sum2 = $data[5];
+    $item[0] = $data[6];
+    $item[1] = $data[7];
+    $item[2] = $data[8];
+    $item[3] = $data[9];
+    $item[4] = $data[10];
+    $item[5] = $data[11];
 
     $chaineResultat = $perso . '-' . $sum1 . '-' . $sum2 . '-' . $item[0] . '-' . $item[1] . '-' . $item[2] . '-' .
         $item[3] . '-' . $item[4] . '-' . $item[5] . '-';

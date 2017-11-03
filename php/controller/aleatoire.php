@@ -75,6 +75,14 @@ if(isset($_POST['nomChampion']))
         $champion = new Personnage($idPerso, $persos->getTab()[$valeur]->getName(),
             $persos->getTab()[$valeur]->getTitle(), $persos->getTab()[$valeur]->getImage(), $spells, $persos->getTab()[$valeur]->getTags());
 
+        // tableau pour l'assignement des sorts à maxer
+        $arrayChiffre = array(1, 2, 3);
+        shuffle($arrayChiffre);
+
+        $chaineResultat .= $arrayChiffre[0] . "-";
+        $chaineResultat .= $arrayChiffre[1] . "-";
+        $chaineResultat .= $arrayChiffre[2] . "-";
+
         // -------------- SUMMONERPELLS ALEATOIRE -------------
 
         $mode = htmlentities($_POST['mode']);

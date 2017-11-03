@@ -20,12 +20,8 @@ echo '<div class="row">
 
 
 /* ____________________________________ SKILLS A MAX ALEATOIRE _______________________________*/
-// tableau pour l'assignement des sorts à maxer
-$arrayChiffre = array(1, 2, 3);
-shuffle($arrayChiffre);
 
 $i = 0;
-
 echo ' <div class="row sectionInfos">
             <div class="col-sm-1">
             </div>
