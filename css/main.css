@@ -254,3 +254,11 @@ img:not(.imgChampAlea):not(.imgChamp) {
     border: none;
     cursor: pointer;
 }
+
+.btnBack {
+    font-size: 40px;
+    position: absolute;
+    top: 5px;
+    left: 60px;
+    cursor: pointer;
+}

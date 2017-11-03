@@ -5,6 +5,7 @@ displayEnteteAlea("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/" 
 echo '<div class="row">
         <div class="infos col-xl-4">
         <div class="row sectionInfos" style="margin-bottom: 15%;margin-top:15%">
+        <span class="glyphicon glyphicon-circle-arrow-left btnBack" onClick="window.history.back()"></span>
             <div class="col-sm-1">
             </div>
             <div class="col-sm-4">
