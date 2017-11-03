@@ -10,4 +10,30 @@ class ChampionSpellsM
 
         return $infoChamp;
     }
+
+    /**
+     * @param $id int id du perso duquel on desire les sorts
+     * @return ChampionSpells[]
+     */
+    public static function getSpellByChampId($id)
+    {
+        $result = file_get_contents('../../js/testJSONSpells.json');
+        $listeSortsParChamp = json_decode($result);
+
+        require_once "../phpCore/ChampionSpells.php";
+
+        $spells =array();
+        foreach($listeSortsParChamp->data as $champ)
+        {
+            if($champ->id == $id)
+            {
+                foreach($champ->spells as $sp)
+                {
+                    array_push($spells, new SummonerSpell(null, $sp->name, $sp->image->full));
+                }
+            }
+        }
+
+        return $spells;
+    }
 }

@@ -27,4 +27,27 @@ class SummonerSpellM
 
         return $resultat;
     }
+
+    /**
+     * @param $id int l'id du sort souhaité
+     * @return SummonerSpell
+     */
+    public static function getSortById($id)
+    {
+        $result = file_get_contents('../../js/testJSONSummoner.json');
+        $listeSorts = json_decode($result);
+
+        $resultat = null;
+        require_once "../phpCore/SummonerSpell.php";
+
+        foreach($listeSorts->data as $sort)
+        {
+            if($sort->id == $id)
+            {
+                $resultat = new SummonerSpell($sort->id, $sort->modes, $sort->image->full);
+            }
+        }
+
+        return $resultat;
+    }
 }

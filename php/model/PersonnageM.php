@@ -26,4 +26,29 @@ class PersonnageM
 
         return $resultat;
     }
+
+    /**
+     * @param $id int l'id du champion souhaité
+     * @param ChampionSpells[] la liste des sorts du champion
+     * @return Personnage
+     */
+    public static function getChampById($id, $spell)
+    {
+        $result = file_get_contents('../../js/testJSON.json');
+        $listeChampions = json_decode($result);
+
+
+        require_once "../phpCore/Personnage.php";
+
+        $resultat = null;
+        foreach($listeChampions->data as $champ)
+        {
+            if($champ->id == $id)
+            {
+                $resultat = new Personnage($champ->id, $champ->name, $champ->title, $champ->image->full, $spell, $champ->tags);
+            }
+        }
+
+        return $resultat;
+    }
 }

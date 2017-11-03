@@ -72,7 +72,7 @@ class CollectionItems extends Collection
      * @param $sumSpell1
      * @param $sumSpell2
      * @param $champion
-     * @return Item
+     * @return Item[]
      */
     public function getAleatoire($nb, $sumSpell1, $sumSpell2, $champion)
     {

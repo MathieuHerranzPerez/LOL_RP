@@ -101,7 +101,11 @@ foreach($items as $item)
 echo '          </div>
             </div>
         </div>';
-
+echo '<h5 style="text-align: center;">Share : </h5><input id="shareUrl", class="col-md-7" onclick="copyUrl(\'shareUrl\');"
+        value="' . $_SERVER['HTTP_HOST'] . '/php/controller/linkReader.php?chaine=' . $chaineResultat . '" readonly>';
+echo '<span id="checked" class="col-md-4" style="display: none;">
+				<img src="'. WEBROOT . 'img/checkmark.png" width="15" height="15"><span>Copied</span>
+			</span>';
 echo '</div>';
 /*______ EFFET OMBRE  ____*/
 

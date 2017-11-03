@@ -131,11 +131,16 @@ select option {
 
 .btnGenerer:hover {
     background: transparent;
-    background-image: -webkit-linear-gradient(top, #080808, #3d0000);
-    background-image: -moz-linear-gradient(top, #080808, #3d0000);
-    background-image: -ms-linear-gradient(top, #080808, #3d0000);
-    background-image: -o-linear-gradient(top, #080808, #3d0000);
-    background-image: linear-gradient(to bottom, #080808, #3d0000);
+    /*background-image: -webkit-linear-gradient(top, #080808, #3d0000);*/
+    /*background-image: -moz-linear-gradient(top, #080808, #3d0000);*/
+    /*background-image: -ms-linear-gradient(top, #080808, #3d0000);*/
+    /*background-image: -o-linear-gradient(top, #080808, #3d0000);*/
+    /*background-image: linear-gradient(to bottom, #080808, #3d0000);*/
+    background-image: -webkit-linear-gradient(top, #000000, #001f33);
+    background-image: -moz-linear-gradient(top, #000000, #001f33);
+    background-image: -ms-linear-gradient(top, #000000, #001f33);
+    background-image: -o-linear-gradient(top, #000000, #001f33);
+    background-image: linear-gradient(top, #000000, #001f33);
 }
 
 .btnPerso {
@@ -241,4 +246,11 @@ footer {
 
 img:not(.imgChampAlea):not(.imgChamp) {
     border-radius: 15% ;
+}
+
+#shareUrl {
+    background-color: black;
+    margin-left: 10px;
+    border: none;
+    cursor: pointer;
 }

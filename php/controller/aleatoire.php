@@ -8,16 +8,16 @@ require_once "../phpCore/SummonerSpell.php";
 require_once "../model/ChampionSpellsM.php";
 require_once "../phpCore/CollectionItems.php";
 require_once "../phpCore/Item.php";
+require_once "../phpCore/Chiffre.php";
 
 
 if(isset($_POST['nomChampion']))
 {
+    $chaineResultat = "";   // pour que l'utilisateur puisse passer un lien
+
     // ------------- PERSONNAGE ALEATOIRE ---------------
     $champGarde = $_POST['nomChampion'];
 
-//foreach($champASupp as $champ)            //TEST
-//    echo $champ . ' ';
-//echo '<br/>';
 
     $persos = unserialize($_SESSION['persos']);
     $persos = $persos->copie($champGarde);
@@ -64,6 +64,9 @@ if(isset($_POST['nomChampion']))
         // On selectionne le personnage aléatoirement
         $idPerso = $persos->getTab()[$valeur]->getId();
 
+        // pour le lien
+        $chaineResultat .= $idPerso . "-";
+
         foreach ($pers->data->$idPerso->spells as $sp)
         {
             array_push($spells, new SummonerSpell(null, $sp->name, $sp->image->full));
@@ -87,12 +90,16 @@ if(isset($_POST['nomChampion']))
 
         $summonerSpells->supprimer($sumSpell1->getId());
 
+        $chaineResultat .=  $sumSpell1->getId() . "-";
+
         srand();
         $valeur = rand();
         $valeur = $valeur % (sizeof($summonerSpells->getTab()));
 
         $sumSpell2 = new SummonerSpell($summonerSpells->getTab()[$valeur]->getId(), $summonerSpells->getTab()[$valeur]->getModes(),
             $summonerSpells->getTab()[$valeur]->getImage());
+
+        $chaineResultat .=  $sumSpell2->getId() . "-";
 
         // -------------- STUFF ALEATOIRE ------------------
 
@@ -106,6 +113,15 @@ if(isset($_POST['nomChampion']))
 //        }
 
         $items = $listItems->getAleatoire(6, $sumSpell1, $sumSpell2, $champion);
+
+        // pour le lien
+        foreach($items as $it)
+        {
+            $chaineResultat .= $it->getId() . "-";
+        }
+
+        $chaineResultat = Chiffre::encrypt($chaineResultat);
+
 
         require_once "../view/aleatoireV.php";
     }

@@ -52,4 +52,25 @@ class ItemM
 
         return $resultat;
     }
+
+    /**
+     * @param $id int l'id de l'item souhaité
+     * @return Item l'item correspondant à l'ID
+     */
+    public static function getItemById($id)
+    {
+        $result = file_get_contents('../../js/testJSONItems.json');
+        $listeItems = json_decode($result);
+
+        $resultat = null;
+        foreach((array) $listeItems->data as $item)
+        {
+            if($item->id == $id)
+            {
+                $resultat = new Item($item->id, $item->name, $item->plaintext, $item->image->full, $item->gold->total, $item->maps, $item->tags);
+            }
+        }
+
+        return $resultat;
+    }
 }

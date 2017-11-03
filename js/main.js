@@ -23,3 +23,19 @@ function toutSelectionner() {
     $('.imgChamp').removeClass('inactiveChamp').addClass('activeChamp');
     $('.checkChamp').prop('checked', true);
 }
+
+function copyUrl(id) {
+    var elem = $('#'+id)[0];
+    elem.focus();
+    elem.setSelectionRange(0, elem.value.length);
+
+    try {
+        document.execCommand("copy");
+    } catch(e) {
+        console.log('Failed to copy to clipboard.')
+    }
+
+    elem.blur();
+    $('#checked').show();
+    $('#checked').fadeOut(2500);
+}
