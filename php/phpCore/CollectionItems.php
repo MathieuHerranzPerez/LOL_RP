@@ -16,6 +16,9 @@ class CollectionItems extends Collection
         $args = func_get_args();
         switch($ctp)
         {
+            case 2:
+                $this->construct3($args[0], $args[1]);
+                break;
             case 1:
                 $this->construct2($args[0]);
                 break;
@@ -26,14 +29,20 @@ class CollectionItems extends Collection
     }
     public function construct1()
     {
-        $this->tab = ItemM::getItems("CLASSIC");
+        $this->tab = ItemM::getItems("CLASSIC", null);
         usort($this->tab, "Item::compare");
     }
 
     public function construct2($mode)
     {
-        $this->tab = ItemM::getItems($mode);
+        $this->tab = ItemM::getItems($mode, null);
         usort($this->tab, "Item::compare");
+    }
+
+    public function construct3($mode, $typeItem)
+    {
+        $this->tab = ItemM::getItems($mode, $typeItem);
+        //usort($this->tab, "Item::compare");
     }
 
     /**
@@ -66,7 +75,7 @@ class CollectionItems extends Collection
     }
 
 
-    //TODO gerer le nombre d'item supp / item ward
+    //TODO gerer le nombre d'item ward et d'item supp
     /**
      * @param $nb int nombre de Items souhaité
      * @param $sumSpell1

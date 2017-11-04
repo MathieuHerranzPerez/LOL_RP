@@ -81,7 +81,7 @@ echo '<div class="row sectionInfos">
             <div class="col-sm-1">
             </div>
             <div class="col-sm-10">
-                <h3>Items</h3>
+                <h3>Items<span style="font-size: 15px;"> (' . $typeStuff . ')</span></h3>
                 <div class="row">';
 $cpt = 0;
 foreach($items as $item)

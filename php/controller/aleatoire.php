@@ -35,7 +35,7 @@ if(isset($_POST['nomChampion']))
     // si on a placé des "filtres", on supprime les champions qui ne correspondent pas
     if(isset($_POST['role']))
     {
-        $role = $_POST['role'];
+        $role = htmlentities($_POST['role']);
         if($role != "All")
         {
             $persosCopie = new CollectionPersonnages(null); // pour appeller le contructeur "par defaut"
@@ -111,16 +111,13 @@ if(isset($_POST['nomChampion']))
 
         // -------------- STUFF ALEATOIRE ------------------
 
-        $listItems = new CollectionItems($mode);
+        // on récupere le type de stuff
+        $typeStuff = htmlentities($_POST['typeStuff']);
+        $chaineResultat .= $typeStuff . "-";
 
-//        // TODO test a enlever
-//        foreach ($listItems->getTab() as $item)
-//        {
-//            echo '<img src="http://ddragon.leagueoflegends.com/cdn/7.20.2/img/item/' . $item->getImage() . '" alt="' . $item->getName() . '"
-//                title="' . $item->getName() . '">';
-//        }
+        // on selectionne les items
+        $items = selectionnerItems($mode, $typeStuff, $sumSpell1, $sumSpell2, $champion);
 
-        $items = $listItems->getAleatoire(6, $sumSpell1, $sumSpell2, $champion);
 
         // pour le lien
         foreach($items as $it)
@@ -141,4 +138,43 @@ if(isset($_POST['nomChampion']))
 else
 {
     require_once "../view/erreurV.php";
+}
+
+/**
+ * @param $mode
+ * @param $typeStuff
+ * @param $sumSpell1
+ * @param $sumSpell2
+ * @param $champion
+ * @return CollectionItems les items selectionnés
+ */
+function selectionnerItems($mode, $typeStuff, $sumSpell1, $sumSpell2, $champion)
+{
+    if($typeStuff == "Random")
+    {
+        $listItems = new CollectionItems($mode);
+        $resultat = $listItems->getAleatoire(6, $sumSpell1, $sumSpell2, $champion);
+    }
+    else if($typeStuff == "Medium")
+    {
+
+    }
+    else if($typeStuff == "Correct")
+    {
+
+    }
+    else
+    {
+        $listItems = new CollectionItems($mode, $typeStuff);
+        $resultat = $listItems->getAleatoire(6, $sumSpell1, $sumSpell2, $champion);
+    }
+
+
+//            // TODO test a enlever
+//        foreach ($listItems->getTab() as $item)
+//        {
+//            echo '<img src="http://ddragon.leagueoflegends.com/cdn/7.20.2/img/item/' . $item->getImage() . '" alt="' . $item->getName() . '"
+//                title="' . $item->getName() . '">';
+//        }
+    return $resultat;
 }

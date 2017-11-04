@@ -145,6 +145,7 @@ select option {
 
 .btnPerso {
     font-size: 20px;
+    float: left;
     font-family: Cinzel, Helvetica, serif;
     padding: 5px 20px;
     border: none;
@@ -163,6 +164,13 @@ select option {
     background-image: -ms-linear-gradient(top, #000000, #101010);
     background-image: -o-linear-gradient(top, #000000, #101010);
     background-image: linear-gradient(to bottom, #000000, #101010);
+}
+
+.role {
+    float: right;
+    margin-top: -5px;
+    font-size: 20px;
+    font-family: Cinzel, Helvetica, serif;
 }
 
 /*_______________________________ Aleatoire Style ________________________________*/

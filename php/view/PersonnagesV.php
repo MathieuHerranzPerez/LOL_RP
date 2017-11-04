@@ -16,23 +16,39 @@ echo '<form method="post" action="' . WEBROOT . 'php/controller/aleatoire.php" s
             <option value="ARAM">Aram</option>
           </select><br/>';
 
-    echo '<h2>What role of champion ?</h2>';
-    echo '<select name="role">
-            <option value="All" selected>All</option>
-            <option value="Marksman">Marksman</option>
-            <option value="Assassin">Assassin</option>
-            <option value="Support">Support</option>
-            <option value="Mage">Mage</option>
-            <option value="Fighter">Fighter</option>
+    echo '<h2>What king of stuff ?</h2>';
+    echo '<select name="typeStuff">
+            <option value="Random" selected>Random</option>
+            <option value="Medium">Medium</option>
+            <option value="Correct">Correct</option>
+            <option value="AD">AD</option>
+            <option value="AP">AP</option>
             <option value="Tank">Tank</option>
+            <option value="FullAD">Full AD</option>
+            <option value="FullAP">Full AP</option>
+            <option value="FullTank">Full Tank</option>
           </select><br/>';
 
     echo '<br/><center><button  class="btnGenerer" type="submit" name="champ">Get Started</button></center>';
 echo '</div>';
     echo '<div class="col-md-8 listeChamp" style="padding: 3% 3% 3% 10%; overflow: hidden; height: 100%">';
-
+    echo '<div style="overflow: hidden;">';
     echo '<button type=button class="btnPerso" onclick="toutSelectionner()">Select all</button>';
-    echo '<button type=button class="btnPerso" onclick="toutDeselectionner()">Unselect all</button><br/>';
+    echo '<button type=button class="btnPerso" onclick="toutDeselectionner()">Unselect all</button>';
+
+    echo '<div class="role">';
+    echo 'Role : <select name="role">
+                <option value="All" selected>All</option>
+                <option value="Marksman">Marksman</option>
+                <option value="Assassin">Assassin</option>
+                <option value="Support">Support</option>
+                <option value="Mage">Mage</option>
+                <option value="Fighter">Fighter</option>
+                <option value="Tank">Tank</option>
+              </select><br/>';
+    echo '</div>';
+    echo '</div>';
+
     foreach($persos->getTab() as $champ)
     {
         echo '<input id="check' . $champ->getId() . '" class="checkChamp" value="' . $champ->getNameId() . '"
