@@ -1,7 +1,11 @@
 <?php
 
 displayEnteteAlea("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/" . str_replace('.png', '_0.jpg', $champion->getImage()));
+echo '<div class="btnHautDroite">';
+echo '<span id="refresh" class="glyphicon glyphicon-repeat" onclick="document.location.reload(false)"></span>';
 echo '<a href="' . WEBROOT . '" class="btnBack"><img src="' . WEBROOT . 'img/logoRPL.png" alt="home" title="home" style="height: 40px;"></a>';
+echo '</div>';
+
 echo '<div class="row">
         <div class="infos col-xl-4">
         <div class="row sectionInfos" style="margin-bottom: 15%;margin-top:15%">

@@ -255,15 +255,20 @@ img:not(.imgChampAlea):not(.imgChamp) {
     cursor: pointer;
 }
 
-.btnBack {
-    font-size: 40px;
-    color: inherit;
+.btnHautDroite {
     position: absolute;
     top: 0px;
-    right: 60px;
+    right: 0px;
+    z-index: 20;
+    padding-right: 40px;
+    padding-top: 15px;
+}
+
+.btnBack {
     cursor: pointer;
     text-decoration: none;
-    z-index: 20;
+    position: relative;
+    float: left;
 }
 
 .btnBack:link {
@@ -274,4 +279,13 @@ img:not(.imgChampAlea):not(.imgChamp) {
 .btnBack:hover {
     text-decoration: none;
     color: inherit;
+}
+
+#refresh {
+    float: left;
+    font-size: 30px;
+    cursor: pointer;
+    position: relative;
+    margin-right: 20px;
+    margin-top: 5px;
 }
