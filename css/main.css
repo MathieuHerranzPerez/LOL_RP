@@ -257,8 +257,21 @@ img:not(.imgChampAlea):not(.imgChamp) {
 
 .btnBack {
     font-size: 40px;
+    color: inherit;
     position: absolute;
-    top: 5px;
-    left: 60px;
+    top: 0px;
+    right: 60px;
     cursor: pointer;
+    text-decoration: none;
+    z-index: 20;
+}
+
+.btnBack:link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.btnBack:hover {
+    text-decoration: none;
+    color: inherit;
 }
