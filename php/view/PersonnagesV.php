@@ -19,8 +19,8 @@ echo '<form method="post" action="' . WEBROOT . 'php/controller/aleatoire.php" s
     echo '<h2>What king of stuff ?</h2>';
     echo '<select name="typeStuff">
             <option value="Random" selected>Random</option>
-            <option value="Medium">Medium</option>
-            <option value="Correct">Correct</option>
+            <!--<option value="Medium">Medium</option>-->
+            <!--<option value="Correct">Correct</option>-->
             <option value="AD">AD</option>
             <option value="AP">AP</option>
             <option value="Tank">Tank</option>
