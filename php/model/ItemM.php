@@ -132,8 +132,7 @@ class ItemM
                 )
                 {
                     if((in_array("Damage", (array)$item->tags) || in_array("CriticalStrike", (array)$item->tags)
-                        || in_array("AttackSpeed", (array)$item->tags) || in_array("OnHit", (array)$item->tags)
-                        || in_array("ArmorPenetration", (array)$item->tags))
+                        || in_array("AttackSpeed", (array)$item->tags) || in_array("ArmorPenetration", (array)$item->tags))
                         || !array_key_exists("tags", $item)) // pour les items jungle
                     {
                         $resultat[$i] = new Item($item->id, $item->name, $item->plaintext, $item->image->full, $item->gold->total, $item->maps, $item->tags, $item->colloq, $item->from);
