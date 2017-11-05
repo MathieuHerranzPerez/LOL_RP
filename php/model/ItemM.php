@@ -24,8 +24,8 @@ class ItemM
         {
             $map = 12;
         }
-
-        if($filtre == null)
+        //TODO les items de Ornn cassent tout ! les items conseillés n'ont pas le buff Ornn, il faut ici recuperer uniquement les rangs 3 (colloq "Ornn" "ornn" ?)
+        if($filtre == null || $filtre == "Medium" || $filtre == "Correct")
         {
             foreach ((array)$listeItems->data as $item) {
                 if (($item->maps->$map == true) &&
@@ -38,7 +38,7 @@ class ItemM
                     strpos($item->name, "(Quick Charge)") === false
                 )    // pour retirer les Quick Charge
                 {
-                    $resultat[$i] = new Item($item->id, $item->name, $item->plaintext, $item->image->full, $item->gold->total, $item->maps, $item->tags);
+                    $resultat[$i] = new Item($item->id, $item->name, $item->plaintext, $item->image->full, $item->gold->total, $item->maps, $item->tags, $item->colloq, $item->from);
                     ++$i;
                 }
             }
@@ -59,7 +59,7 @@ class ItemM
                     if((!in_array("SpellDamage", (array)$item->tags) && !in_array("MagicPenetration", (array)$item->tags))
                         || (in_array("Damage", (array)$item->tags) && in_array("SpellDamage", (array)$item->tags)))
                     {
-                        $resultat[$i] = new Item($item->id, $item->name, $item->plaintext, $item->image->full, $item->gold->total, $item->maps, $item->tags);
+                        $resultat[$i] = new Item($item->id, $item->name, $item->plaintext, $item->image->full, $item->gold->total, $item->maps, $item->tags, $item->colloq, $item->from);
                         ++$i;
                     }
 
@@ -82,7 +82,7 @@ class ItemM
                     if((!in_array("Damage", (array)$item->tags) && !in_array("CriticalStrike", (array)$item->tags))
                         || (in_array("Damage", (array)$item->tags) && in_array("SpellDamage", (array)$item->tags)))
                     {
-                        $resultat[$i] = new Item($item->id, $item->name, $item->plaintext, $item->image->full, $item->gold->total, $item->maps, $item->tags);
+                        $resultat[$i] = new Item($item->id, $item->name, $item->plaintext, $item->image->full, $item->gold->total, $item->maps, $item->tags, $item->colloq, $item->from);
                         ++$i;
                     }
 
@@ -106,7 +106,7 @@ class ItemM
                         || in_array("Armor", (array)$item->tags) || in_array("SpellBlock", (array)$item->tags))
                         || !array_key_exists("tags", $item)) // pour les items jungle
                     {
-                        $resultat[$i] = new Item($item->id, $item->name, $item->plaintext, $item->image->full, $item->gold->total, $item->maps, $item->tags);
+                        $resultat[$i] = new Item($item->id, $item->name, $item->plaintext, $item->image->full, $item->gold->total, $item->maps, $item->tags, $item->colloq, $item->from);
                         ++$i;
                     }
 
@@ -131,7 +131,7 @@ class ItemM
                         || in_array("ArmorPenetration", (array)$item->tags))
                         || !array_key_exists("tags", $item)) // pour les items jungle
                     {
-                        $resultat[$i] = new Item($item->id, $item->name, $item->plaintext, $item->image->full, $item->gold->total, $item->maps, $item->tags);
+                        $resultat[$i] = new Item($item->id, $item->name, $item->plaintext, $item->image->full, $item->gold->total, $item->maps, $item->tags, $item->colloq, $item->from);
                         ++$i;
                     }
 
@@ -154,7 +154,7 @@ class ItemM
                     if((in_array("SpellDamage", (array)$item->tags) || in_array("MagicPenetration", (array)$item->tags))
                         || !array_key_exists("tags", $item))    // pour les items jungle
                     {
-                        $resultat[$i] = new Item($item->id, $item->name, $item->plaintext, $item->image->full, $item->gold->total, $item->maps, $item->tags);
+                        $resultat[$i] = new Item($item->id, $item->name, $item->plaintext, $item->image->full, $item->gold->total, $item->maps, $item->tags, $item->colloq, $item->from);
                         ++$i;
                     }
 
@@ -180,7 +180,7 @@ class ItemM
                         && !in_array("Damage", (array)$item->tags) && !in_array("CriticalStrike", (array)$item->tags)))
                         || !array_key_exists("tags", $item))    // pour les items jungle
                     {
-                        $resultat[$i] = new Item($item->id, $item->name, $item->plaintext, $item->image->full, $item->gold->total, $item->maps, $item->tags);
+                        $resultat[$i] = new Item($item->id, $item->name, $item->plaintext, $item->image->full, $item->gold->total, $item->maps, $item->tags, $item->colloq, $item->from);
                         ++$i;
                     }
 
@@ -203,7 +203,7 @@ class ItemM
                     if((in_array("Active", (array)$item->tags) || in_array("Boots", (array)$item->tags))
                         || !array_key_exists("tags", $item))    // pour les items jungle
                     {
-                        $resultat[$i] = new Item($item->id, $item->name, $item->plaintext, $item->image->full, $item->gold->total, $item->maps, $item->tags);
+                        $resultat[$i] = new Item($item->id, $item->name, $item->plaintext, $item->image->full, $item->gold->total, $item->maps, $item->tags, $item->colloq, $item->from);
                         ++$i;
                     }
 
@@ -218,7 +218,7 @@ class ItemM
     {
         $result = file_get_contents('../../js/testJSONViktorItem.json');
         $listeItems = json_decode($result);
-        $resultat = new Item(str_replace(".png", "", $listeItems->image->full), $listeItems->name, $listeItems->plaintext, $listeItems->image->full, $listeItems->gold->total, $listeItems->maps, $listeItems->tags);
+        $resultat = new Item(str_replace(".png", "", $listeItems->image->full), $listeItems->name, $listeItems->plaintext, $listeItems->image->full, $listeItems->gold->total, $listeItems->maps, $listeItems->tags, $listeItems->colloq, $listeItems->from);
 
         return $resultat;
     }
@@ -237,7 +237,7 @@ class ItemM
         {
             if($item->id == $id)
             {
-                $resultat = new Item($item->id, $item->name, $item->plaintext, $item->image->full, $item->gold->total, $item->maps, $item->tags);
+                $resultat = new Item($item->id, $item->name, $item->plaintext, $item->image->full, $item->gold->total, $item->maps, $item->tags, $item->colloq, $item->from);
             }
         }
 

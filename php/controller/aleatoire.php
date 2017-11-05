@@ -72,7 +72,7 @@ if(isset($_POST['nomChampion']))
             array_push($spells, new SummonerSpell(null, $sp->name, $sp->image->full));
         }
 
-        $champion = new Personnage($idPerso, $persos->getTab()[$valeur]->getName(),
+        $champion = new Personnage($idPerso, $persos->getTab()[$valeur]->getName(), $persos->getTab()[$valeur]->getNameId(),
             $persos->getTab()[$valeur]->getTitle(), $persos->getTab()[$valeur]->getImage(), $spells, $persos->getTab()[$valeur]->getTags());
 
         // tableau pour l'assignement des sorts à maxer
@@ -157,7 +157,19 @@ function selectionnerItems($mode, $typeStuff, $sumSpell1, $sumSpell2, $champion)
     }
     else if($typeStuff == "Medium")
     {
+        $listItems = new CollectionItems($mode, $typeStuff);
+//                    // TODO test a enlever
+//        foreach ($listItems->getTab() as $item)
+//        {
+//            echo '<img src="http://ddragon.leagueoflegends.com/cdn/7.20.2/img/item/' . $item->getImage() . '" alt="' . $item->getName() . '"
+//                title="' . $item->getName() . '">';
+//        }
+        // on recupere les items essentiels et on y ajoute un item jungle si besoin
+        $resultat = $listItems->getEssentiels($sumSpell1, $sumSpell2, $champion, $mode);
 
+        $nb = 6 - sizeof($resultat);
+        // on remplie avec de l'aleatoire
+        $resultat = $listItems->remplirAleatoire($nb, $resultat);
     }
     else if($typeStuff == "Correct")
     {

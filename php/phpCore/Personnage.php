@@ -21,13 +21,13 @@ class Personnage implements Comparable
      * @param $image
      * @param $spells ChampionSpells[]
      */
-    public function __construct($id, $name, $title, $image, $spells, $tags)
+    public function __construct($id, $name, $nameId, $title, $image, $spells, $tags)
     {
         $this->id = $id;
         $this->name = $name;
         $this->title = $title;
         $this->image = $image;
-        $this->nameId = str_replace(' ', '', str_replace('\'', '', str_replace('.', '', $name)));
+        $this->nameId = $nameId;
         $this->spells = $spells;
         $this->tags = $tags;
     }

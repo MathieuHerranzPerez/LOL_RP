@@ -20,7 +20,7 @@ class PersonnageM
 
         foreach($listeChampions->data as $champ)
         {
-            $resultat[$i] = new Personnage($champ->id, $champ->name, $champ->title, $champ->image->full, null, $champ->tags);
+            $resultat[$i] = new Personnage($champ->id, $champ->name, $champ->key, $champ->title, $champ->image->full, null, $champ->tags);
             ++$i;
         }
 
@@ -45,10 +45,70 @@ class PersonnageM
         {
             if($champ->id == $id)
             {
-                $resultat = new Personnage($champ->id, $champ->name, $champ->title, $champ->image->full, $spell, $champ->tags);
+                $resultat = new Personnage($champ->id, $champ->name, $champ->key,  $champ->title, $champ->image->full, $spell, $champ->tags);
             }
         }
 
         return $resultat;
+    }
+
+    /**
+     * @param $champion
+     * @param $type string type d'objets cherchés (essential ...)
+     * @param $mode string mode de jeu (CLASSIC / ARAM ...)
+     * @return array int representant les id des items $type pour le $champion
+     */
+    public static function getChampStuff($champion, $type, $mode)
+    {
+        $result = file_get_contents('../../js/testJSON.json');
+        $listeChampions = json_decode($result);
+
+        $nomChamp = $champion->getNameId();
+        $boolKayn = false;
+        if($nomChamp == "Kayn")
+        {
+            $boolKayn = true;
+        }
+
+        $tabId = array();
+        $cpt = 0;
+        foreach($listeChampions->data->$nomChamp->recommended as $recommended)
+        {
+            //cpt : pour ne pas avoir les items supp / jungle  //pour ne pas avoir la map 3v3
+            if($cpt < 1 && ($recommended->mode == $mode && ($recommended->map == "SR" || $recommended->map == "HA")))
+            {
+                ++$cpt;
+                foreach($recommended->blocks as $block)
+                {
+                    if(!$boolKayn)
+                    {
+                        if ($block->type == $type)
+                        {
+                            foreach ($block->items as $item)
+                            {
+                                array_push($tabId, $item->id);
+                            }
+                        }
+                    }
+                    else // cas special pour Kayn qui n'a pas les mêmes type que les autres --'
+                    {
+                        if ($block->type == $type || $block->type == "basekaynstandard")
+                        {
+                            foreach ($block->items as $item)
+                            {
+                                array_push($tabId, $item->id);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+//                    // TODO test a enlever
+//        foreach ($tabId as $item)
+//        {
+//            echo $item . ' - ';
+//        }
+
+        return $tabId;
     }
 }
