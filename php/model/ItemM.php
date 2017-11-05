@@ -24,7 +24,7 @@ class ItemM
         {
             $map = 12;
         }
-        //TODO les items de Ornn cassent tout ! les items conseillés n'ont pas le buff Ornn, il faut ici recuperer uniquement les rangs 3 (colloq "Ornn" "ornn" ?)
+
         if($filtre == null || $filtre == "Medium" || $filtre == "Correct")
         {
             foreach ((array)$listeItems->data as $item) {
@@ -33,7 +33,8 @@ class ItemM
                     $item->gold->purchasable == true &&
                     // pour ne pas se farcire les enchantements des boosts
                     // les chaussures et les items de rang 4
-                    ((($item->depth == 3 && !array_key_exists("into", $item) || $item->depth == 4)) || ($item->depth == 2 && in_array("Boots", $item->tags))) &&
+                    (((($item->depth == 2 && !array_key_exists("stacks", $item)) && !array_key_exists("into", $item) && !in_array("Consumable", $item->tags) || $item->depth == 3 && !array_key_exists("into", $item)
+                            || $item->depth == 4)) || ($item->depth == 2 && in_array("Boots", $item->tags))) &&
                     array_key_exists("plaintext", $item) && // pour retirer les enchantements avec image de boots
                     strpos($item->name, "(Quick Charge)") === false
                 )    // pour retirer les Quick Charge
@@ -51,7 +52,8 @@ class ItemM
                     $item->gold->purchasable == true &&
                     // pour ne pas se farcire les enchantements des boosts
                     // les chaussures et les items de rang 4
-                    ((($item->depth == 3 && !array_key_exists("into", $item) || $item->depth == 4)) || ($item->depth == 2 && in_array("Boots", $item->tags))) &&
+                    (((($item->depth == 2 && !array_key_exists("stacks", $item)) && !array_key_exists("into", $item) && !in_array("Consumable", $item->tags) || $item->depth == 3 && !array_key_exists("into", $item)
+                            || $item->depth == 4)) || ($item->depth == 2 && in_array("Boots", $item->tags))) &&
                     array_key_exists("plaintext", $item) && // pour retirer les enchantements avec image de boots
                     strpos($item->name, "(Quick Charge)") === false  // pour retirer les Quick Charge
                 )
@@ -74,7 +76,8 @@ class ItemM
                     $item->gold->purchasable == true &&
                     // pour ne pas se farcire les enchantements des boosts
                     // les chaussures et les items de rang 4
-                    ((($item->depth == 3 && !array_key_exists("into", $item) || $item->depth == 4)) || ($item->depth == 2 && in_array("Boots", $item->tags))) &&
+                    (((($item->depth == 2 && !array_key_exists("stacks", $item)) && !array_key_exists("into", $item) && !in_array("Consumable", $item->tags) || $item->depth == 3 && !array_key_exists("into", $item)
+                            || $item->depth == 4)) || ($item->depth == 2 && in_array("Boots", $item->tags))) &&
                     array_key_exists("plaintext", $item) && // pour retirer les enchantements avec image de boots
                     strpos($item->name, "(Quick Charge)") === false  // pour retirer les Quick Charge
                 )
@@ -97,7 +100,8 @@ class ItemM
                     $item->gold->purchasable == true &&
                     // pour ne pas se farcire les enchantements des boosts
                     // les chaussures et les items de rang 4
-                    ((($item->depth == 3 && !array_key_exists("into", $item) || $item->depth == 4)) || ($item->depth == 2 && in_array("Boots", $item->tags))) &&
+                    (((($item->depth == 2 && !array_key_exists("stacks", $item)) && !array_key_exists("into", $item) && !in_array("Consumable", $item->tags) || $item->depth == 3 && !array_key_exists("into", $item)
+                            || $item->depth == 4)) || ($item->depth == 2 && in_array("Boots", $item->tags))) &&
                     array_key_exists("plaintext", $item) && // pour retirer les enchantements avec image de boots
                     strpos($item->name, "(Quick Charge)") === false  // pour retirer les Quick Charge
                 )
@@ -121,7 +125,8 @@ class ItemM
                     $item->gold->purchasable == true &&
                     // pour ne pas se farcire les enchantements des boosts
                     // les chaussures et les items de rang 4
-                    ((($item->depth == 3 && !array_key_exists("into", $item) || $item->depth == 4)) || ($item->depth == 2 && in_array("Boots", $item->tags))) &&
+                    (((($item->depth == 2 && !array_key_exists("stacks", $item)) && !array_key_exists("into", $item) && !in_array("Consumable", $item->tags) || $item->depth == 3 && !array_key_exists("into", $item)
+                            || $item->depth == 4)) || ($item->depth == 2 && in_array("Boots", $item->tags))) &&
                     array_key_exists("plaintext", $item) && // pour retirer les enchantements avec image de boots
                     strpos($item->name, "(Quick Charge)") === false  // pour retirer les Quick Charge
                 )
@@ -146,7 +151,8 @@ class ItemM
                     $item->gold->purchasable == true &&
                     // pour ne pas se farcire les enchantements des boosts
                     // les chaussures et les items de rang 4
-                    ((($item->depth == 3 && !array_key_exists("into", $item) || $item->depth == 4)) || ($item->depth == 2 && in_array("Boots", $item->tags))) &&
+                    (((($item->depth == 2 && !array_key_exists("stacks", $item)) && !array_key_exists("into", $item) && !in_array("Consumable", $item->tags) || $item->depth == 3 && !array_key_exists("into", $item)
+                            || $item->depth == 4)) || ($item->depth == 2 && in_array("Boots", $item->tags))) &&
                     array_key_exists("plaintext", $item) && // pour retirer les enchantements avec image de boots
                     strpos($item->name, "(Quick Charge)") === false  // pour retirer les Quick Charge
                 )
@@ -169,7 +175,8 @@ class ItemM
                     $item->gold->purchasable == true &&
                     // pour ne pas se farcire les enchantements des boosts
                     // les chaussures et les items de rang 4
-                    ((($item->depth == 3 && !array_key_exists("into", $item) || $item->depth == 4)) || ($item->depth == 2 && in_array("Boots", $item->tags))) &&
+                    (((($item->depth == 2 && !array_key_exists("stacks", $item)) && !array_key_exists("into", $item) && !in_array("Consumable", $item->tags) || $item->depth == 3 && !array_key_exists("into", $item)
+                            || $item->depth == 4)) || ($item->depth == 2 && in_array("Boots", $item->tags))) &&
                     array_key_exists("plaintext", $item) && // pour retirer les enchantements avec image de boots
                     strpos($item->name, "(Quick Charge)") === false  // pour retirer les Quick Charge
                 )
@@ -195,7 +202,8 @@ class ItemM
                     $item->gold->purchasable == true &&
                     // pour ne pas se farcire les enchantements des boosts
                     // les chaussures et les items de rang 4
-                    ((($item->depth == 3 && !array_key_exists("into", $item) || $item->depth == 4)) || ($item->depth == 2 && in_array("Boots", $item->tags))) &&
+                    (((($item->depth == 2 && !array_key_exists("stacks", $item)) && !array_key_exists("into", $item) && !in_array("Consumable", $item->tags) || $item->depth == 3 && !array_key_exists("into", $item)
+                            || $item->depth == 4)) || ($item->depth == 2 && in_array("Boots", $item->tags))) &&
                     array_key_exists("plaintext", $item) && // pour retirer les enchantements avec image de boots
                     strpos($item->name, "(Quick Charge)") === false  // pour retirer les Quick Charge
                 )

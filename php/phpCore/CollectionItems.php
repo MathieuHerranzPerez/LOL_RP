@@ -264,6 +264,8 @@ class CollectionItems extends Collection
     {
         $essentialItems = array();
 
+        $this->ajouter(ItemM::getViktorItem());
+
         // Dans le cas où un des summoner spells est un smite
         if($sumSpell1->getName() == "SummonerSmite" || $sumSpell2->getName() == "SummonerSmite")
         {
@@ -300,8 +302,63 @@ class CollectionItems extends Collection
             }
         }
 
-        // on supprime les boots de la collection
-        $this->supprimerBoots();
+        // on verifie si il y a des boots, si il n'y en a pas, on en ajoute
+        $boolBoots = false;
+        foreach($essentialItems as $item)
+        {
+            if($item->getTags() != null)    // dans le cas où on est sur un item sans tag
+            {
+                if(in_array("Boots", $item->getTags()))
+                {
+                    $boolBoots = true;
+                }
+            }
+        }
+        if(!$boolBoots)
+        {
+            // gestion des boots
+            if($champion->getName() != "Cassiopeia")
+            {
+                $itemBoots = array();
+                foreach($this->tab as $item)
+                {
+                    // on supprime les boots de la collection
+                    if(is_array($item->getTags()))
+                    {
+                        foreach ($item->getTags() as $tag)
+                        {
+                            if ($tag == "Boots")
+                            {
+                                array_push($itemBoots, new Item($item->getId(), $item->getName(), $item->getPlaintext(),
+                                    $item->getImage(), $item->getGold(), $item->getMaps(), $item->getTags(), $item->getColloq(), $item->getFrom()));
+                                $this->supprimer($item->getId());
+                            }
+                        }
+                    }
+                }
+                srand();
+                $valeur = rand();
+                $valeur = $valeur % (sizeof($itemBoots));
+                array_push($essentialItems, $itemBoots[$valeur]);
+            }
+            else
+            {
+                // on supprime les boots de la collection
+                $this->supprimerBoots();
+            }
+        }
+        else
+        {
+            // on supprime les boots de la collection
+            $this->supprimerBoots();
+        }
+
+        // si il y est toujours, on supprime l'objet a Viktor
+        $indice = CollectionItems::getIndiceParId($this->tab, 3198);
+        if($indice >= 0)
+        {
+            $this->supprimerEnFonction($indice);
+        }
 
 
         return $essentialItems;
