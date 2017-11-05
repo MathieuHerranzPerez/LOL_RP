@@ -360,6 +360,7 @@ class CollectionItems extends Collection
             $this->supprimerEnFonction($indice);
         }
 
+        usort($essentialItems, "Item::compareBoots");
 
         return $essentialItems;
     }

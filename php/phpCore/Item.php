@@ -99,6 +99,20 @@ class Item
             return 0;
     }
 
+    public static function compareBoots($o1, $other)
+    {
+        if(!($other instanceof Item && $o1 instanceof Item)) { /* TODO EXCEPTION */ }
+
+        if($o1->getTags() != null && $other->getTags() != null)
+        {
+            if (in_array("Boots", $o1->getTags()) && !in_array("Boots", $other->getTags()))
+                return -1;
+            else if (!in_array("Boots", $o1->getTags()) && in_array("Boots", $other->getTags()))
+                return 1;
+        }
+        return 0;
+    }
+
     function __toString()
     {
         return "id : " . $this->id . "  name : " . $this->name;

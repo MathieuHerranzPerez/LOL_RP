@@ -39,3 +39,15 @@ function copyUrl(id) {
     $('#checked').show();
     $('#checked').fadeOut(2500);
 }
+
+function overlayOn(id) {
+    var idClass = '#' + id;
+
+    $(idClass).show();
+}
+
+function overlayOff(id) {
+    var idClass = '#' + id;
+
+    $(idClass).hide();
+}

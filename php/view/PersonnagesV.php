@@ -2,7 +2,8 @@
 
 displayEntete("img/summonerRift.jpg");
 //ob_start();
-echo '<h1 style="font-family: Cinzel, Helvetica, serif; font-size: 50px; margin-top: 50px; color: #cac1bd;">RANDOM PICK<br/>LEAGUE OF LEGENDS</h1>';
+echo '<h1 class="titreSite" style="font-family: Cinzel, Helvetica, serif; font-size: 50px; margin-top: 50px; color: #cac1bd;">
+        <span class="lettres">RANDOM PICK<br/>LEAGUE OF LEGENDS</span></h1>';
 echo '<div class="col-xl-12 degradeHautBas"></div>';
 echo '<div class="row personnagesRow">';
 
@@ -33,6 +34,9 @@ echo '<form method="post" action="' . WEBROOT . 'php/controller/aleatoire.php" s
     echo '<br/><center><button  class="btnGenerer" type="submit" name="champ">Get Started</button></center>';
 echo '</div>';
     echo '<div class="col-md-8 listeChamp" style="padding: 3% 3% 3% 10%; overflow: hidden; height: 100%">';
+    echo '<div id="overlayExplications" style="display: none;" onclick="overlayOff(\'overlayExplications\')"><p>Your champions will be saved in your cookies for you to not lose it.
+            If you buy a new champion, no problem, just add it into the list below !</p></div>';
+    echo '<h2 id="boutonOverlay" onclick="overlayOn(\'overlayExplications\')">Select your champions<span> * </span></h2>';
     echo '<div style="overflow: hidden;">';
     echo '<button type=button class="btnPerso" onclick="toutSelectionner()">Select all</button>';
     echo '<button type=button class="btnPerso" onclick="toutDeselectionner()">Unselect all</button>';

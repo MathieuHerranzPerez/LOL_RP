@@ -74,6 +74,14 @@ select option {
 
 /*______________________________ Personnages Style _______________________________*/
 
+.titreSite {
+    text-shadow: 0px 0px 13px rgba(0, 0, 0, 1);
+}
+
+.lettres {
+    /*color: darkgoldenrod;*/
+}
+
 .personnagesRow {
     color: #cac1bd;
     background-color: rgba(0, 0, 0, 0.75);
@@ -95,9 +103,6 @@ select option {
     margin-top: 70px;
 }
 
-.listeChamp {
-
-}
 
 .imgChamp {
     cursor: pointer;
@@ -171,6 +176,21 @@ select option {
     margin-top: -5px;
     font-size: 20px;
     font-family: Cinzel, Helvetica, serif;
+}
+
+#boutonOverlay {
+    cursor: pointer;
+}
+
+#overlayExplications {
+    position: absolute;
+    padding: 10px 20px;
+    max-width: 500px;
+    background: rgba(0, 0, 0, 1);
+    font-size: 20px;
+    font-family: Helvetica, serif;
+    z-index: 3;
+    cursor: pointer;
 }
 
 /*_______________________________ Aleatoire Style ________________________________*/
@@ -277,6 +297,7 @@ img:not(.imgChampAlea):not(.imgChamp) {
     text-decoration: none;
     position: relative;
     float: left;
+    color: inherit;
 }
 
 .btnBack:link {
@@ -289,7 +310,7 @@ img:not(.imgChampAlea):not(.imgChamp) {
     color: inherit;
 }
 
-#refresh {
+.refresh {
     float: left;
     font-size: 30px;
     cursor: pointer;
