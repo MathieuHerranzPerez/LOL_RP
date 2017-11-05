@@ -27,6 +27,7 @@ echo '<form method="post" action="' . WEBROOT . 'php/controller/aleatoire.php" s
             <option value="FullAD">Full AD</option>
             <option value="FullAP">Full AP</option>
             <option value="FullTank">Full Tank</option>
+            <option value="Active">Active</option>
           </select><br/>';
 
     echo '<br/><center><button  class="btnGenerer" type="submit" name="champ">Get Started</button></center>';

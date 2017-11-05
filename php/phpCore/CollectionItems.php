@@ -75,7 +75,6 @@ class CollectionItems extends Collection
     }
 
 
-    //TODO gerer le nombre d'item ward et d'item supp
     /**
      * @param $nb int nombre de Items souhaité
      * @param $sumSpell1
@@ -180,18 +179,32 @@ class CollectionItems extends Collection
             array_push($randItems,$this->tab[$valeur]);
 
             // s'il s'agit du Hextech
-            if( strpos($this->tab[$valeur]->getName(), 'Hextech') !== false ) {
+            if( strpos($this->tab[$valeur]->getName(), 'Hextech') !== false )
+            {
                 // on supprime les autres items Hextem du tableau pour ne pas les avoir
-                foreach($this->tab as $item) {
+                foreach($this->tab as $item)
+                {
                     if( strpos($item->getName(), 'Hextech') !== false )
-                    $this->supprimer($item->getId());
+                        $this->supprimer($item->getId());
                 }
             }
             // s'il s'agit du item à Gold
-            if( in_array("GoldPer", $this->tab[$valeur]->getTags()) == true) {
+            else if( in_array("GoldPer", $this->tab[$valeur]->getTags()) == true)
+            {
                 // on supprime les autres items à gold du tableau pour ne pas les avoir
-                foreach($this->tab as $item) {
-                    if( in_array("GoldPer", $this->tab[$valeur]->getTags()) == true )
+                foreach($this->tab as $item)
+                {
+                    if( in_array("GoldPer", $item->getTags()) == true )
+                        $this->supprimer($item->getId());
+                }
+            }
+            //si il s'agit d'un item a ward
+            else if(in_array("Vision", $this->tab[$valeur]->getTags()))
+            {
+                // on supprime les autres items à ward du tableau pour ne pas les avoir
+                foreach($this->tab as $item)
+                {
+                    if(in_array("Vision", $item->getTags()))
                         $this->supprimer($item->getId());
                 }
             }
