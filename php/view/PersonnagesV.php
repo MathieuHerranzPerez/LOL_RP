@@ -17,7 +17,7 @@ echo '<form method="post" action="' . WEBROOT . 'php/controller/aleatoire.php" s
             <option value="ARAM">Aram</option>
           </select><br/>';
 
-    echo '<h2>What king of stuff ?</h2>';
+    echo '<h2>What kind of stuff ?</h2>';
     echo '<select name="typeStuff">
             <option value="Random" selected>Random</option>
             <option value="Medium">Medium</option>

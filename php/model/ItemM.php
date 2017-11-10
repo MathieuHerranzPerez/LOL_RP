@@ -28,16 +28,7 @@ class ItemM
         if($filtre == null || $filtre == "Medium" || $filtre == "Correct")
         {
             foreach ((array)$listeItems->data as $item) {
-                if (($item->maps->$map == true) &&
-                    !array_key_exists("requiredChampion", $item) &&
-                    $item->gold->purchasable == true &&
-                    // pour ne pas se farcire les enchantements des boosts
-                    // les chaussures et les items de rang 4
-                    (((($item->depth == 2 && !array_key_exists("stacks", $item)) && !array_key_exists("into", $item) && !in_array("Consumable", $item->tags) || $item->depth == 3 && !array_key_exists("into", $item)
-                            || $item->depth == 4)) || ($item->depth == 2 && in_array("Boots", $item->tags))) &&
-                    array_key_exists("plaintext", $item) && // pour retirer les enchantements avec image de boots
-                    strpos($item->name, "(Quick Charge)") === false
-                )    // pour retirer les Quick Charge
+                if (ItemM::conditionIf($item, $map))
                 {
                     $resultat[$i] = new Item($item->id, $item->name, $item->plaintext, $item->image->full, $item->gold->total, $item->maps, $item->tags, $item->colloq, $item->from);
                     ++$i;
@@ -47,16 +38,7 @@ class ItemM
         else if($filtre == "AD")    // TODO ça fonctionn, mais les items jungle AP passent ...
         {
             foreach ((array)$listeItems->data as $item) {
-                if (($item->maps->$map == true) &&
-                    !array_key_exists("requiredChampion", $item) &&
-                    $item->gold->purchasable == true &&
-                    // pour ne pas se farcire les enchantements des boosts
-                    // les chaussures et les items de rang 4
-                    (((($item->depth == 2 && !array_key_exists("stacks", $item)) && !array_key_exists("into", $item) && !in_array("Consumable", $item->tags) || $item->depth == 3 && !array_key_exists("into", $item)
-                            || $item->depth == 4)) || ($item->depth == 2 && in_array("Boots", $item->tags))) &&
-                    array_key_exists("plaintext", $item) && // pour retirer les enchantements avec image de boots
-                    strpos($item->name, "(Quick Charge)") === false  // pour retirer les Quick Charge
-                )
+                if (ItemM::conditionIf($item, $map))
                 {
                     if((!in_array("SpellDamage", (array)$item->tags) && !in_array("MagicPenetration", (array)$item->tags))
                         || (in_array("Damage", (array)$item->tags) && in_array("SpellDamage", (array)$item->tags)))
@@ -71,16 +53,7 @@ class ItemM
         else if($filtre == "AP")    // TODO ça fonctionn, mais les items jungle AD passent ...
         {
             foreach ((array)$listeItems->data as $item) {
-                if (($item->maps->$map == true) &&
-                    !array_key_exists("requiredChampion", $item) &&
-                    $item->gold->purchasable == true &&
-                    // pour ne pas se farcire les enchantements des boosts
-                    // les chaussures et les items de rang 4
-                    (((($item->depth == 2 && !array_key_exists("stacks", $item)) && !array_key_exists("into", $item) && !in_array("Consumable", $item->tags) || $item->depth == 3 && !array_key_exists("into", $item)
-                            || $item->depth == 4)) || ($item->depth == 2 && in_array("Boots", $item->tags))) &&
-                    array_key_exists("plaintext", $item) && // pour retirer les enchantements avec image de boots
-                    strpos($item->name, "(Quick Charge)") === false  // pour retirer les Quick Charge
-                )
+                if (ItemM::conditionIf($item, $map))
                 {
                     if((!in_array("Damage", (array)$item->tags) && !in_array("CriticalStrike", (array)$item->tags))
                         || (in_array("Damage", (array)$item->tags) && in_array("SpellDamage", (array)$item->tags)))
@@ -95,16 +68,7 @@ class ItemM
         else if($filtre == "Tank")
         {
             foreach ((array)$listeItems->data as $item) {
-                if (($item->maps->$map == true) &&
-                    !array_key_exists("requiredChampion", $item) &&
-                    $item->gold->purchasable == true &&
-                    // pour ne pas se farcire les enchantements des boosts
-                    // les chaussures et les items de rang 4
-                    (((($item->depth == 2 && !array_key_exists("stacks", $item)) && !array_key_exists("into", $item) && !in_array("Consumable", $item->tags) || $item->depth == 3 && !array_key_exists("into", $item)
-                            || $item->depth == 4)) || ($item->depth == 2 && in_array("Boots", $item->tags))) &&
-                    array_key_exists("plaintext", $item) && // pour retirer les enchantements avec image de boots
-                    strpos($item->name, "(Quick Charge)") === false  // pour retirer les Quick Charge
-                )
+                if (ItemM::conditionIf($item, $map))
                 {
                     if((in_array("Health", (array)$item->tags) || in_array("HealthRegen", (array)$item->tags)
                         || in_array("Armor", (array)$item->tags) || in_array("SpellBlock", (array)$item->tags))
@@ -120,16 +84,7 @@ class ItemM
         else if($filtre == "FullAD")
         {
             foreach ((array)$listeItems->data as $item) {
-                if (($item->maps->$map == true) &&
-                    !array_key_exists("requiredChampion", $item) &&
-                    $item->gold->purchasable == true &&
-                    // pour ne pas se farcire les enchantements des boosts
-                    // les chaussures et les items de rang 4
-                    (((($item->depth == 2 && !array_key_exists("stacks", $item)) && !array_key_exists("into", $item) && !in_array("Consumable", $item->tags) || $item->depth == 3 && !array_key_exists("into", $item)
-                            || $item->depth == 4)) || ($item->depth == 2 && in_array("Boots", $item->tags))) &&
-                    array_key_exists("plaintext", $item) && // pour retirer les enchantements avec image de boots
-                    strpos($item->name, "(Quick Charge)") === false  // pour retirer les Quick Charge
-                )
+                if (ItemM::conditionIf($item, $map))
                 {
                     if((in_array("Damage", (array)$item->tags) || in_array("CriticalStrike", (array)$item->tags)
                         || in_array("AttackSpeed", (array)$item->tags) || in_array("ArmorPenetration", (array)$item->tags))
@@ -145,16 +100,7 @@ class ItemM
         else if($filtre == "FullAP")
         {
             foreach ((array)$listeItems->data as $item) {
-                if (($item->maps->$map == true) &&
-                    !array_key_exists("requiredChampion", $item) &&
-                    $item->gold->purchasable == true &&
-                    // pour ne pas se farcire les enchantements des boosts
-                    // les chaussures et les items de rang 4
-                    (((($item->depth == 2 && !array_key_exists("stacks", $item)) && !array_key_exists("into", $item) && !in_array("Consumable", $item->tags) || $item->depth == 3 && !array_key_exists("into", $item)
-                            || $item->depth == 4)) || ($item->depth == 2 && in_array("Boots", $item->tags))) &&
-                    array_key_exists("plaintext", $item) && // pour retirer les enchantements avec image de boots
-                    strpos($item->name, "(Quick Charge)") === false  // pour retirer les Quick Charge
-                )
+                if (ItemM::conditionIf($item, $map))
                 {
                     if((in_array("SpellDamage", (array)$item->tags) || in_array("MagicPenetration", (array)$item->tags))
                         || !array_key_exists("tags", $item))    // pour les items jungle
@@ -169,16 +115,7 @@ class ItemM
         else if($filtre == "FullTank")
         {
             foreach ((array)$listeItems->data as $item) {
-                if (($item->maps->$map == true) &&
-                    !array_key_exists("requiredChampion", $item) &&
-                    $item->gold->purchasable == true &&
-                    // pour ne pas se farcire les enchantements des boosts
-                    // les chaussures et les items de rang 4
-                    (((($item->depth == 2 && !array_key_exists("stacks", $item)) && !array_key_exists("into", $item) && !in_array("Consumable", $item->tags) || $item->depth == 3 && !array_key_exists("into", $item)
-                            || $item->depth == 4)) || ($item->depth == 2 && in_array("Boots", $item->tags))) &&
-                    array_key_exists("plaintext", $item) && // pour retirer les enchantements avec image de boots
-                    strpos($item->name, "(Quick Charge)") === false  // pour retirer les Quick Charge
-                )
+                if (ItemM::conditionIf($item, $map))
                 {
                     if(((in_array("Health", (array)$item->tags) || in_array("HealthRegen", (array)$item->tags)
                         || in_array("Armor", (array)$item->tags) || in_array("SpellBlock", (array)$item->tags))
@@ -196,16 +133,7 @@ class ItemM
         else if($filtre == "Active")
         {
             foreach ((array)$listeItems->data as $item) {
-                if (($item->maps->$map == true) &&
-                    !array_key_exists("requiredChampion", $item) &&
-                    $item->gold->purchasable == true &&
-                    // pour ne pas se farcire les enchantements des boosts
-                    // les chaussures et les items de rang 4
-                    (((($item->depth == 2 && !array_key_exists("stacks", $item)) && !array_key_exists("into", $item) && !in_array("Consumable", $item->tags) || $item->depth == 3 && !array_key_exists("into", $item)
-                            || $item->depth == 4)) || ($item->depth == 2 && in_array("Boots", $item->tags))) &&
-                    array_key_exists("plaintext", $item) && // pour retirer les enchantements avec image de boots
-                    strpos($item->name, "(Quick Charge)") === false  // pour retirer les Quick Charge
-                )
+                if (ItemM::conditionIf($item, $map))
                 {
                     if((in_array("Active", (array)$item->tags) || in_array("Boots", (array)$item->tags))
                         || !array_key_exists("tags", $item))    // pour les items jungle
@@ -249,5 +177,18 @@ class ItemM
         }
 
         return $resultat;
+    }
+
+    private static function conditionIf($item, $map)
+    {
+        return ($item->maps->$map == true) &&
+        !array_key_exists("requiredChampion", $item) &&
+        $item->gold->purchasable == true &&
+        // pour ne pas se farcire les enchantements des boosts
+        // les chaussures et les items de rang 4
+        (((($item->depth == 2 && !array_key_exists("stacks", $item)) && !array_key_exists("into", $item) && !in_array("Consumable", $item->tags) || $item->depth == 3 && !array_key_exists("into", $item)
+                || $item->depth == 4)) || ($item->depth == 2 && in_array("Boots", $item->tags))) &&
+        array_key_exists("plaintext", $item) && // pour retirer les enchantements avec image de boots
+        strpos($item->name, "(Quick Charge)") === false;  // pour retirer les Quick Charge
     }
 }
